@@ -1,4 +1,4 @@
-# Aplicativo do Héstia
+# API PostgresSQL
 
 API de conexão com CRUD básico em integração com o banco de dados PostgresSQL. 
 
