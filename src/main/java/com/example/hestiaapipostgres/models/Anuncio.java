@@ -9,14 +9,10 @@ public class Anuncio {
 
     @Id
     @Column(updatable = false, nullable = false, columnDefinition = "UUID")
-
-
     private UUID id;
-
     @ManyToOne
     @JoinColumn(name = "anunciante_id", nullable = false)
     private Anunciante anunciante;
-
     private String descricao;
 
     private String nome;
