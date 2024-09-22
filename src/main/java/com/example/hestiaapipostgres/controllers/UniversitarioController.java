@@ -1,14 +1,17 @@
 package com.example.hestiaapipostgres.controllers;
 
 
+import com.example.hestiaapipostgres.dto.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.services.UniversitarioService;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/hestiaapi/postgres/university")
@@ -20,8 +23,24 @@ public class UniversitarioController {
         this.universitarioService = universitarioService;
     }
 
-    @GetMapping("findAll")
+    //                        ==--=--= GETS -==-=-=-=-
+
+    @GetMapping("/findAll")
     public List<Universitario> findAllUniversities(){
         return universitarioService.listAllUniversities();
     }
+
+    @GetMapping("/findById")
+    public Universitario findUniversityById(@RequestHeader UUID id){
+       return universitarioService.listUniversityById(id);
+    }
+
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<UniversitarioProfileInfo> getProfileByUniversity(@PathVariable UUID id){
+        UniversitarioProfileInfo universitarioProfileInfo = universitarioService.getInfoProfileByUniversity(id);
+        return ResponseEntity.ok().body(universitarioProfileInfo);
+    }
+
+    //                        =-=-=-= POSTS =-=-=-=
+
 }
