@@ -6,6 +6,7 @@ import com.example.hestiaapipostgres.repository.AnuncianteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AnuncianteService {
@@ -14,6 +15,9 @@ public class AnuncianteService {
 
     public AnuncianteService(AnuncianteRepository anuncianteRepository) {
         this.anuncianteRepository = anuncianteRepository;
+    }
+    public Anunciante listAdvertiserById(UUID id){
+        return anuncianteRepository.findAnuncianteById(id);
     }
 
     public List<Anunciante> listAllAdvertisers(){
