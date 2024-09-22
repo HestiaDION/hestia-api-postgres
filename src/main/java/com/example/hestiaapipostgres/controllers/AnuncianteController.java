@@ -18,7 +18,7 @@ public class AnuncianteController {
     private final AnuncianteService anuncianteService;
 
     public AnuncianteController(AnuncianteService anuncianteService){
-        this.anuncianteService = anuncianteService;;;;
+        this.anuncianteService = anuncianteService;
     }
 
     @GetMapping("/findAdvertiverById")
