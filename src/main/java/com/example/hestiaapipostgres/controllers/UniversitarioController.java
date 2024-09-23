@@ -1,10 +1,12 @@
 package com.example.hestiaapipostgres.controllers;
 
 
+import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
 import com.example.hestiaapipostgres.dto.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.services.UniversitarioService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -42,5 +44,13 @@ public class UniversitarioController {
     }
 
     //                        =-=-=-= POSTS =-=-=-=
+
+    @PostMapping("/register")
+    public ResponseEntity<Universitario> registerUniversity(@Valid @RequestBody RegisterUniversityDTO registerUniversityDTO){
+
+        Universitario universitario = universitarioService.registerUniversity(registerUniversityDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(universitario);
+
+    }
 
 }

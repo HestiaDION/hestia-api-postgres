@@ -14,5 +14,7 @@ import java.util.UUID;
 public interface UniversitarioRepository extends JpaRepository<Universitario, UUID> {
     Optional<Universitario> findUniversitarioById(UUID id);
 
+    Optional<Universitario> findUniversitarioByDne(String dne);
+
 
 }
