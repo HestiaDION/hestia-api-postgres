@@ -1,9 +1,15 @@
 package com.example.hestiaapipostgres.models;
 
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
+import org.springframework.boot.autoconfigure.web.WebProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
+
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
@@ -14,6 +20,7 @@ import java.util.UUID;
 public class Universitario {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false, nullable = false)
     private UUID id;
     private LocalDate dt_nascimento;
@@ -43,6 +50,20 @@ public class Universitario {
         this.genero = genero;
 
     }
+
+    public Universitario(LocalDate dt_nascimento, String nome, String dne, String bio, String cidade,
+                         String telefone, String universidade, String genero) {
+        this.dt_nascimento = dt_nascimento;
+        this.nome = nome;
+        this.dne = dne;
+        this.bio = bio;
+        this.cidade = cidade;
+        this.telefone = telefone;
+        this.universidade = universidade;
+        this.genero = genero;
+
+    }
+
 
     public String getGenero() {
         return genero;

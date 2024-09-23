@@ -15,4 +15,8 @@ public interface UniversitarioRepository extends JpaRepository<Universitario, UU
     Optional<Universitario> findUniversitarioById(UUID id);
 
 
+    Optional<Universitario> findUniversitarioByDne(String dne);
+
+
+
 }
