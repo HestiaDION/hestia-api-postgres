@@ -31,5 +31,4 @@ public class AnuncianteController {
         return anuncianteService.listAllAdvertisers();
     }
 
-
 }

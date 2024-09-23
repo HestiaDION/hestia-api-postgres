@@ -1,8 +1,15 @@
 package com.example.hestiaapipostgres.models;
 
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.springframework.boot.autoconfigure.web.WebProperties;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Size;
+
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
@@ -56,6 +63,7 @@ public class Universitario {
         this.genero = genero;
 
     }
+
 
     public String getGenero() {
         return genero;
