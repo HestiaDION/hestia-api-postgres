@@ -32,18 +32,18 @@ public class Universitario {
     @Size(min = 11, max = 11)
     private String telefone;
     private String universidade;
-
     private String genero;
+    //TODO: implementar plano_id
+
 
     public Universitario(){}
 
-    public Universitario(UUID id, LocalDate dt_nascimento, String nome, String dne, String bio, String cidade,
+    public Universitario(UUID id, LocalDate dt_nascimento, String nome, String dne, String cidade,
                          String telefone, String universidade, String genero) {
         this.id = id;
         this.dt_nascimento = dt_nascimento;
         this.nome = nome;
         this.dne = dne;
-        this.bio = bio;
         this.cidade = cidade;
         this.telefone = telefone;
         this.universidade = universidade;
@@ -53,17 +53,14 @@ public class Universitario {
 
 
     // construtor para registro
-    public Universitario(LocalDate dt_nascimento, String nome, String dne, String bio, String cidade,
-                         String telefone, String universidade, String genero) {
-        this.dt_nascimento = dt_nascimento;
+    public Universitario(LocalDate dtNascimento, String nome, String dne, String cidade, String telefone, String universidade, String genero) {
+        this.dt_nascimento = dtNascimento;
         this.nome = nome;
         this.dne = dne;
-        this.bio = bio;
         this.cidade = cidade;
         this.telefone = telefone;
         this.universidade = universidade;
         this.genero = genero;
-
     }
 
     public Universitario(String nome, String bio, String cidade, String telefone) {
@@ -72,6 +69,8 @@ public class Universitario {
         this.cidade = cidade;
         this.telefone = telefone;
     }
+
+
 
 
     public String getGenero() {

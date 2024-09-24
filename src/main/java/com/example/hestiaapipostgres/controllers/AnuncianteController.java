@@ -1,12 +1,16 @@
 package com.example.hestiaapipostgres.controllers;
 
 
+import com.example.hestiaapipostgres.dto.RegisterAdvertiserDTO;
+import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
 import com.example.hestiaapipostgres.models.Anunciante;
 
+import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.services.AnuncianteService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +33,17 @@ public class AnuncianteController {
     @GetMapping("findAll")
     public List<Anunciante> findAllAdvertisers(){
         return anuncianteService.listAllAdvertisers();
+    }
+
+
+    //            =--=-= POSTS -=--=-=-
+
+    @PostMapping("/register")
+    public ResponseEntity<Anunciante> registerAdvertiser(@Valid @RequestBody RegisterAdvertiserDTO registerAdvertiserDTO){
+
+        Anunciante anunciante = anuncianteService.registerAdvertiser(registerAdvertiserDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(anunciante);
+
     }
 
 }

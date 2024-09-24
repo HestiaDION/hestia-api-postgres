@@ -25,6 +25,7 @@ public class GlobalExceptionHandler {
 
     String REGISTER_NOT_FOUND = "Registro não encontrado";
     String ERROR_OCURRED = "Error Ocurred";
+    String REGISTER_ALREADY_EXISTS = "Registro já existente";
 
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<CustomErrorResponse> handleResponseStatusException(ResponseStatusException ex) {
@@ -48,6 +49,19 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(EntityExistsException.class)
+    public ResponseEntity<CustomErrorResponse> handleEntityExistsException(EntityExistsException ex) {
+
+        CustomErrorResponse errorResponse = new CustomErrorResponse(
+                REGISTER_ALREADY_EXISTS,
+                ex.getMessage(),
+                HttpStatus.NOT_FOUND.value()
+        );
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
