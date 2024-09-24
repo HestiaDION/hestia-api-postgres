@@ -51,6 +51,8 @@ public class Universitario {
 
     }
 
+
+    // construtor para registro
     public Universitario(LocalDate dt_nascimento, String nome, String dne, String bio, String cidade,
                          String telefone, String universidade, String genero) {
         this.dt_nascimento = dt_nascimento;
@@ -62,6 +64,13 @@ public class Universitario {
         this.universidade = universidade;
         this.genero = genero;
 
+    }
+
+    public Universitario(String nome, String bio, String cidade, String telefone) {
+        this.nome = nome;
+        this.bio = bio;
+        this.cidade = cidade;
+        this.telefone = telefone;
     }
 
 

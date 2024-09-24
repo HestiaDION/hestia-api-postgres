@@ -2,6 +2,7 @@ package com.example.hestiaapipostgres.services;
 
 import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
 import com.example.hestiaapipostgres.dto.UniversitarioProfileInfo;
+import com.example.hestiaapipostgres.dto.UpdateUniversityDTO;
 import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.repository.UniversitarioRepository;
 import jakarta.persistence.EntityExistsException;
@@ -10,6 +11,7 @@ import com.example.hestiaapipostgres.dto.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.repository.UniversitarioRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -62,5 +64,37 @@ public class UniversitarioService {
         }
         return universitarioRepository.save(registerUniversityDTO.toUniversity());
     }
+
+
+    // PATCH
+
+    public Universitario updateUniversity(UUID id, UpdateUniversityDTO updateUniversityDTO){
+
+        Optional<Universitario> universitarioExistente = universitarioRepository.findUniversitarioById(id);
+        if(universitarioExistente.isEmpty()){
+            throw new EntityNotFoundException("Este registro não existe no banco.");
+        }
+
+        Universitario universitario = universitarioExistente.get();
+
+        // dar os sets para atualizar
+        // verificando os campos, já que não há obrigatoriedade em atualizar todos eles juntos
+        if(updateUniversityDTO.cidade() != null && !updateUniversityDTO.cidade().isEmpty()){
+            universitario.setCidade(updateUniversityDTO.cidade());
+        }
+        if(updateUniversityDTO.telefone() != null && !updateUniversityDTO.telefone().isEmpty()){
+            universitario.setTelefone(updateUniversityDTO.telefone());
+        }
+        if(updateUniversityDTO.bio() != null && !updateUniversityDTO.bio().isEmpty()){
+            universitario.setBio(updateUniversityDTO.bio());
+        }
+        if(updateUniversityDTO.nome() != null && !updateUniversityDTO.nome().isEmpty()){
+            universitario.setNome(updateUniversityDTO.nome());
+        }
+
+        return universitarioRepository.save(universitario);
+
+    }
+
 
 }

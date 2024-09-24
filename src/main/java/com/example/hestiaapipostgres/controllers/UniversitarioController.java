@@ -3,6 +3,7 @@ package com.example.hestiaapipostgres.controllers;
 import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
 
 import com.example.hestiaapipostgres.dto.UniversitarioProfileInfo;
+import com.example.hestiaapipostgres.dto.UpdateUniversityDTO;
 import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.services.UniversitarioService;
 import jakarta.persistence.EntityNotFoundException;
@@ -29,7 +30,7 @@ public class UniversitarioController {
 
     //                        ==--=--= GETS -==-=-=-=-
 
-    @GetMapping("/findAll")
+    @GetMapping("/listAll")
     public List<Universitario> findAllUniversities(){
         return universitarioService.listAllUniversities();
     }
@@ -55,5 +56,15 @@ public class UniversitarioController {
 
     }
 
+
+    //                   =--==--===- PATCH -==-=-=-=-=-
+
+    @PatchMapping("/updateProfile/{id}")
+    public ResponseEntity<Universitario> updateUniversity(@PathVariable UUID id, @Valid @RequestBody UpdateUniversityDTO updateUniversityDTO){
+
+        Universitario universitario = universitarioService.updateUniversity(id, updateUniversityDTO);
+
+        return ResponseEntity.status(HttpStatus.OK).body(universitario);
+    }
 
 }
