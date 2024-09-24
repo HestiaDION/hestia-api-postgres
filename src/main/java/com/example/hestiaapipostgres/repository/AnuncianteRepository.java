@@ -1,6 +1,7 @@
 package com.example.hestiaapipostgres.repository;
 
 import com.example.hestiaapipostgres.models.Anunciante;
+import com.example.hestiaapipostgres.models.Universitario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +12,5 @@ import java.util.UUID;
 public interface AnuncianteRepository extends JpaRepository<Anunciante, UUID> {
 
     Optional<Anunciante> findAnuncianteById(UUID id);
+    Optional<Anunciante> findAnuncianteByTelefone(String telefone);
 }

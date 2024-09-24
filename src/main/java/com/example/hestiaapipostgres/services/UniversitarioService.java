@@ -60,7 +60,7 @@ public class UniversitarioService {
     public Universitario registerUniversity(RegisterUniversityDTO registerUniversityDTO){
 
         if (!universitarioRepository.findUniversitarioByDne(registerUniversityDTO.dne()).isEmpty()){
-            throw new EntityExistsException();
+            throw new EntityExistsException("Este registro já existe no banco!");
         }
         return universitarioRepository.save(registerUniversityDTO.toUniversity());
     }
