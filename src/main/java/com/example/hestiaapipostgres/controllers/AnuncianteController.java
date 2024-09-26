@@ -3,6 +3,8 @@ package com.example.hestiaapipostgres.controllers;
 
 import com.example.hestiaapipostgres.dto.RegisterAdvertiserDTO;
 import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
+import com.example.hestiaapipostgres.dto.UpdateAdvertiserDTO;
+import com.example.hestiaapipostgres.dto.UpdateUniversityDTO;
 import com.example.hestiaapipostgres.models.Anunciante;
 
 import com.example.hestiaapipostgres.models.Universitario;
@@ -25,8 +27,8 @@ public class AnuncianteController {
         this.anuncianteService = anuncianteService;
     }
 
-    @GetMapping("/findAdvertiverById")
-    public Anunciante FindAdvertiserById(UUID id){
+    @GetMapping("/find/{}")
+    public Anunciante FindAdvertiserById(@PathVariable UUID id){
         return anuncianteService.listAdvertiserById(id);
     }
 
@@ -44,6 +46,15 @@ public class AnuncianteController {
         Anunciante anunciante = anuncianteService.registerAdvertiser(registerAdvertiserDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(anunciante);
 
+    }
+
+
+    //         =-=-=-= PATCH =-=-==-
+    @PatchMapping("/updateProfile/{id}")
+    public ResponseEntity<Anunciante> updateAdvertiser(@PathVariable UUID id, @Valid @RequestBody UpdateAdvertiserDTO updateAdvertiserDTO){
+
+        Anunciante anunciante = anuncianteService.updateAdvertiser(id, updateAdvertiserDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(anunciante);
     }
 
 }

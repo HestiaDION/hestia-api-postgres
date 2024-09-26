@@ -72,7 +72,7 @@ public class UniversitarioService {
 
         Optional<Universitario> universitarioExistente = universitarioRepository.findUniversitarioById(id);
         if(universitarioExistente.isEmpty()){
-            throw new EntityNotFoundException("Este registro não existe no banco.");
+            throw new EntityNotFoundException("Este registro não existe no banco ou nessa tabela.");
         }
 
         Universitario universitario = universitarioExistente.get();

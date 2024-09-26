@@ -35,8 +35,8 @@ public class UniversitarioController {
         return universitarioService.listAllUniversities();
     }
 
-    @GetMapping("/findById")
-    public Universitario findUniversityById(@RequestHeader UUID id){
+    @GetMapping("/find/{id}")
+    public Universitario findUniversityById(@PathVariable UUID id){
        return universitarioService.listUniversityById(id);
     }
 
