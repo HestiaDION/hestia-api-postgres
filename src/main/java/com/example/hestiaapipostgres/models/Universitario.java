@@ -33,13 +33,17 @@ public class Universitario {
     private String telefone;
     private String universidade;
     private String genero;
+
     //TODO: implementar plano_id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "plano_id")
+    private Plano plano;
 
 
     public Universitario(){}
 
     public Universitario(UUID id, LocalDate dt_nascimento, String nome, String dne, String cidade,
-                         String telefone, String universidade, String genero) {
+                         String telefone, String universidade, String genero, Plano plano) {
         this.id = id;
         this.dt_nascimento = dt_nascimento;
         this.nome = nome;
@@ -48,6 +52,7 @@ public class Universitario {
         this.telefone = telefone;
         this.universidade = universidade;
         this.genero = genero;
+        this.plano = plano;
 
     }
 
@@ -63,6 +68,8 @@ public class Universitario {
         this.genero = genero;
     }
 
+
+    // construtor para comsulta de perfil
     public Universitario(String nome, String bio, String cidade, String telefone) {
         this.nome = nome;
         this.bio = bio;

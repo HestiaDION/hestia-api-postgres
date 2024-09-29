@@ -1,7 +1,5 @@
 package com.example.hestiaapipostgres.repository;
 
-import com.example.hestiaapipostgres.dto.UniversitarioProfileInfo;
-import com.example.hestiaapipostgres.models.Anunciante;
 import com.example.hestiaapipostgres.models.Universitario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

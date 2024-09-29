@@ -3,7 +3,9 @@ package com.example.hestiaapipostgres.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +15,9 @@ public class Plano {
     private String tipo_plano;
     private String info;
     private double valor;
+
+    @OneToMany(mappedBy = "plano") // Relacionamento inverso
+    private List<Universitario> universitarios;
 
     public Plano(){}
     public Plano(UUID id, String tipo_plano, String info, double valor){
