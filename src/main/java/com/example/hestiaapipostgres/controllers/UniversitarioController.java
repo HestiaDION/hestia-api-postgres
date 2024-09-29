@@ -2,24 +2,22 @@ package com.example.hestiaapipostgres.controllers;
 
 import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
 
-import com.example.hestiaapipostgres.dto.UniversitarioProfileInfo;
+import com.example.hestiaapipostgres.dto.perfil.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.dto.UpdateUniversityDTO;
 import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.services.UniversitarioService;
-import jakarta.persistence.EntityNotFoundException;
 
 import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/hestiaapi/postgres/university")
+@RequestMapping("/university")
 public class UniversitarioController {
 
     private final UniversitarioService universitarioService;

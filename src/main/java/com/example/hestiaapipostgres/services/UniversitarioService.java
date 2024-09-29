@@ -1,15 +1,11 @@
 package com.example.hestiaapipostgres.services;
 
 import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
-import com.example.hestiaapipostgres.dto.UniversitarioProfileInfo;
+import com.example.hestiaapipostgres.dto.perfil.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.dto.UpdateUniversityDTO;
 import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.repository.UniversitarioRepository;
 import jakarta.persistence.EntityExistsException;
-
-import com.example.hestiaapipostgres.dto.UniversitarioProfileInfo;
-import com.example.hestiaapipostgres.models.Universitario;
-import com.example.hestiaapipostgres.repository.UniversitarioRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -35,7 +31,7 @@ public class UniversitarioService {
 
     public UniversitarioProfileInfo getInfoProfileByUniversity(UUID id){
         Universitario universitarioProfileInfo = universitarioRepository.findUniversitarioById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Univesitário não encontrado")
+                () -> new EntityNotFoundException("Univesitário não encontrado")
 
         );
 
@@ -50,13 +46,12 @@ public class UniversitarioService {
 
     public Universitario listUniversityById(UUID id){
         return universitarioRepository.findUniversitarioById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Univesitário não encontrado")
+                () -> new EntityNotFoundException("Univesitário não encontrado")
         );
     }
 
 
     // POST
-
     public Universitario registerUniversity(RegisterUniversityDTO registerUniversityDTO){
 
         if (!universitarioRepository.findUniversitarioByDne(registerUniversityDTO.dne()).isEmpty()){
@@ -67,7 +62,6 @@ public class UniversitarioService {
 
 
     // PATCH
-
     public Universitario updateUniversity(UUID id, UpdateUniversityDTO updateUniversityDTO){
 
         Optional<Universitario> universitarioExistente = universitarioRepository.findUniversitarioById(id);

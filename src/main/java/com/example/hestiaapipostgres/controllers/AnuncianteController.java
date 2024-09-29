@@ -1,13 +1,11 @@
 package com.example.hestiaapipostgres.controllers;
 
 
-import com.example.hestiaapipostgres.dto.RegisterAdvertiserDTO;
-import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
-import com.example.hestiaapipostgres.dto.UpdateAdvertiserDTO;
-import com.example.hestiaapipostgres.dto.UpdateUniversityDTO;
+import com.example.hestiaapipostgres.dto.*;
+import com.example.hestiaapipostgres.dto.perfil.AnuncianteProfileInfo;
+import com.example.hestiaapipostgres.dto.perfil.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.models.Anunciante;
 
-import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.services.AnuncianteService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -18,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/hestiaapi/postgres/advertiser")
+@RequestMapping("/advertiser")
 
 public class AnuncianteController {
     private final AnuncianteService anuncianteService;
@@ -27,7 +25,10 @@ public class AnuncianteController {
         this.anuncianteService = anuncianteService;
     }
 
-    @GetMapping("/find/{}")
+
+    //          =-=-=- GETS =-=-=--=
+
+    @GetMapping("/find/{id}")
     public Anunciante FindAdvertiserById(@PathVariable UUID id){
         return anuncianteService.listAdvertiserById(id);
     }
@@ -37,7 +38,12 @@ public class AnuncianteController {
         return anuncianteService.listAllAdvertisers();
     }
 
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<AnuncianteProfileInfo> getProfileByUniversity(@PathVariable UUID id){
 
+        AnuncianteProfileInfo anuncianteProfileInfo = anuncianteService.getInfoProfileByAdvertiser(id);
+        return ResponseEntity.ok().body(anuncianteProfileInfo);
+    }
     //            =--=-= POSTS -=--=-=-
 
     @PostMapping("/register")

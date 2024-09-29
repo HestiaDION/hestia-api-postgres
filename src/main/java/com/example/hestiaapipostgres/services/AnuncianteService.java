@@ -5,6 +5,8 @@ import com.example.hestiaapipostgres.dto.RegisterAdvertiserDTO;
 import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
 import com.example.hestiaapipostgres.dto.UpdateAdvertiserDTO;
 import com.example.hestiaapipostgres.dto.UpdateUniversityDTO;
+import com.example.hestiaapipostgres.dto.perfil.AnuncianteProfileInfo;
+import com.example.hestiaapipostgres.dto.perfil.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.models.Anunciante;
 import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.repository.AnuncianteRepository;
@@ -28,17 +30,31 @@ public class AnuncianteService {
     }
     public Anunciante listAdvertiserById(UUID id){
         return anuncianteRepository.findAnuncianteById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Anunciante não encontrado")
+                () -> new EntityNotFoundException("Anunciante não encontrado")
         );
     }
 
+    // GETS
     public List<Anunciante> listAllAdvertisers(){
         return anuncianteRepository.findAll();
     }
 
+    public AnuncianteProfileInfo getInfoProfileByAdvertiser(UUID id){
+        Anunciante anuncianteProfileInfo = anuncianteRepository.findAnuncianteById(id).orElseThrow(
+                () -> new EntityNotFoundException("Anunciante não encontrado")
+
+        );
+
+        return new AnuncianteProfileInfo(
+                anuncianteProfileInfo.getGenero(),
+                anuncianteProfileInfo.getBio(),
+                anuncianteProfileInfo.getDtNascimento()
+        );
+
+    }
+
 
     // POST
-
     public Anunciante registerAdvertiser(RegisterAdvertiserDTO registerAdvertiserDTO){
 
         if (!anuncianteRepository.findAnuncianteByTelefone(registerAdvertiserDTO.telefone()).isEmpty()){
