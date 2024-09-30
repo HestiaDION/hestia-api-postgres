@@ -13,4 +13,5 @@ public interface AnuncianteRepository extends JpaRepository<Anunciante, UUID> {
 
     Optional<Anunciante> findAnuncianteById(UUID id);
     Optional<Anunciante> findAnuncianteByTelefone(String telefone);
+    Optional<Anunciante> findAnuncianteByEmail(String email);
 }

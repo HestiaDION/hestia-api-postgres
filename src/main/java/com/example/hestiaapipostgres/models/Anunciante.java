@@ -13,6 +13,7 @@ public class Anunciante {
     @Column(updatable = false, nullable = false)
     private UUID id;
     private String nome;
+    private String email;
     private String bio;
     private LocalDate dt_nascimento;
     private String telefone;
@@ -20,7 +21,7 @@ public class Anunciante {
     private String genero;
     //TODO: implementar plano_id
     public Anunciante(){}
-    public Anunciante(UUID id, String nome, String bio, LocalDate dt_nascimento, String telefone, String cidade, String genero) {
+    public Anunciante(UUID id, String nome, String bio, LocalDate dt_nascimento, String telefone, String cidade, String genero, String email) {
         this.id = id;
         this.nome = nome;
         this.bio = bio;
@@ -28,14 +29,17 @@ public class Anunciante {
         this.telefone = telefone;
         this.cidade = cidade;
         this.genero = genero;
+        this.email = email;
+
     }
 
-    public Anunciante(String nome, String cidade, String telefone, LocalDate dtNascimento, String genero) {
+    public Anunciante(String nome, String cidade, String telefone, LocalDate dtNascimento, String genero, String email) {
         this.nome = nome;
         this.cidade = cidade;
         this.telefone = telefone;
         this.genero = genero;
         this.dt_nascimento = dtNascimento;
+        this.email = email;
     }
 
     public UUID getId() {
@@ -95,6 +99,19 @@ public class Anunciante {
     }
 
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    public LocalDate getDt_nascimento() {
+        return dt_nascimento;
+    }
+
+    public void setDt_nascimento(LocalDate dt_nascimento) {
+        this.dt_nascimento = dt_nascimento;
+    }
 }

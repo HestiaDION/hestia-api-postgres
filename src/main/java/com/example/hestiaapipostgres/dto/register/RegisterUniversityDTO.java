@@ -1,7 +1,8 @@
-package com.example.hestiaapipostgres.dto;
+package com.example.hestiaapipostgres.dto.register;
 
 import com.example.hestiaapipostgres.models.Universitario;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -14,6 +15,11 @@ public record RegisterUniversityDTO(
         @NotBlank(message = "O nome não deve estar em branco")
         @Size(message="O nome deve ter no mínimo 3 caracteres", min = 3)
         String nome,
+
+        @NotNull(message = "o e-mail não pode ser nulo")
+        @NotBlank(message = "O e-mail não deve estar em branco")
+        @Email(message = "O e-mail fornecido não á válido")
+        String email,
         @NotNull(message = "A DNE não pode ser nula")
         @NotBlank(message = "O nome não deve estar em branco")
         String dne,
@@ -45,7 +51,8 @@ public record RegisterUniversityDTO(
                         this.cidade,
                         this.telefone,
                         this.universidade,
-                        this.genero
+                        this.genero,
+                        this.email
 
                 );
 
