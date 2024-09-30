@@ -1,8 +1,6 @@
 package com.example.hestiaapipostgres.services;
 
-import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
 import com.example.hestiaapipostgres.models.Anuncio;
-import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.repository.AnuncioRepository;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,6 @@ public class AnuncioService {
     }
 
     // GET
-
     public List<Anuncio> listAllAds(){
         return anuncioRepository.findAll();
     }

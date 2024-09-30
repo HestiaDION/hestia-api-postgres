@@ -1,8 +1,6 @@
 package com.example.hestiaapipostgres.controllers;
 
-import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
 import com.example.hestiaapipostgres.models.Anuncio;
-import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.services.AnuncioService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

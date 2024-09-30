@@ -1,16 +1,14 @@
 package com.example.hestiaapipostgres.services;
 
-import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
+import com.example.hestiaapipostgres.dto.register.RegisterUniversityDTO;
 import com.example.hestiaapipostgres.dto.perfil.UniversitarioProfileInfo;
-import com.example.hestiaapipostgres.dto.UpdateUniversityDTO;
+import com.example.hestiaapipostgres.dto.update.UpdateUniversityDTO;
 import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.repository.UniversitarioRepository;
 import jakarta.persistence.EntityExistsException;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,9 +1,9 @@
 package com.example.hestiaapipostgres.controllers;
 
-import com.example.hestiaapipostgres.dto.RegisterUniversityDTO;
+import com.example.hestiaapipostgres.dto.register.RegisterUniversityDTO;
 
 import com.example.hestiaapipostgres.dto.perfil.UniversitarioProfileInfo;
-import com.example.hestiaapipostgres.dto.UpdateUniversityDTO;
+import com.example.hestiaapipostgres.dto.update.UpdateUniversityDTO;
 import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.services.UniversitarioService;
 

@@ -34,6 +34,9 @@ public class Universitario {
     private String universidade;
     private String genero;
 
+    // adicionando email: linkagem com o fireauth
+    private String email;
+
     //TODO: implementar plano_id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plano_id")
@@ -58,7 +61,7 @@ public class Universitario {
 
 
     // construtor para registro
-    public Universitario(LocalDate dtNascimento, String nome, String dne, String cidade, String telefone, String universidade, String genero) {
+    public Universitario(LocalDate dtNascimento, String nome, String dne, String cidade, String telefone, String universidade, String genero, String email) {
         this.dt_nascimento = dtNascimento;
         this.nome = nome;
         this.dne = dne;
@@ -66,6 +69,7 @@ public class Universitario {
         this.telefone = telefone;
         this.universidade = universidade;
         this.genero = genero;
+        this.email = email;
     }
 
 
@@ -76,7 +80,6 @@ public class Universitario {
         this.cidade = cidade;
         this.telefone = telefone;
     }
-
 
 
 
@@ -150,5 +153,21 @@ public class Universitario {
 
     public void setUniversidade(String universidade) {
         this.universidade = universidade;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Plano getPlano() {
+        return plano;
+    }
+
+    public void setPlano(Plano plano) {
+        this.plano = plano;
     }
 }

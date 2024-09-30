@@ -1,4 +1,4 @@
-package com.example.hestiaapipostgres.dto;
+package com.example.hestiaapipostgres.dto.update;
 
 
 import jakarta.validation.constraints.Size;
