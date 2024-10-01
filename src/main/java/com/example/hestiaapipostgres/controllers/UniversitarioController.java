@@ -38,9 +38,9 @@ public class UniversitarioController {
        return universitarioService.listUniversityById(id);
     }
 
-    @GetMapping("/profile/{id}")
-    public ResponseEntity<UniversitarioProfileInfo> getProfileByUniversity(@PathVariable UUID id){
-        UniversitarioProfileInfo universitarioProfileInfo = universitarioService.getInfoProfileByUniversity(id);
+    @GetMapping("/profile/{email}")
+    public ResponseEntity<UniversitarioProfileInfo> getProfileByUniversity(@PathVariable String email){
+        UniversitarioProfileInfo universitarioProfileInfo = universitarioService.getInfoProfileByUniversity(email);
         return ResponseEntity.ok().body(universitarioProfileInfo);
     }
 
