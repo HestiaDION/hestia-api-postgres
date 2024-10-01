@@ -38,10 +38,10 @@ public class AnuncianteController {
         return anuncianteService.listAllAdvertisers();
     }
 
-    @GetMapping("/profile/{id}")
-    public ResponseEntity<AnuncianteProfileInfo> getProfileByUniversity(@PathVariable UUID id){
+    @GetMapping("/profile/{email}")
+    public ResponseEntity<AnuncianteProfileInfo> getProfileByUniversity(@PathVariable String email){
 
-        AnuncianteProfileInfo anuncianteProfileInfo = anuncianteService.getInfoProfileByAdvertiser(id);
+        AnuncianteProfileInfo anuncianteProfileInfo = anuncianteService.getInfoProfileByAdvertiser(email);
         return ResponseEntity.ok().body(anuncianteProfileInfo);
     }
     //            =--=-= POSTS -=--=-=-

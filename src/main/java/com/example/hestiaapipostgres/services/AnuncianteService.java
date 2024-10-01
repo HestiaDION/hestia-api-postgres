@@ -33,8 +33,8 @@ public class AnuncianteService {
         return anuncianteRepository.findAll();
     }
 
-    public AnuncianteProfileInfo getInfoProfileByAdvertiser(UUID id){
-        Anunciante anuncianteProfileInfo = anuncianteRepository.findAnuncianteById(id).orElseThrow(
+    public AnuncianteProfileInfo getInfoProfileByAdvertiser(String email){
+        Anunciante anuncianteProfileInfo = anuncianteRepository.findAnuncianteByEmail(email).orElseThrow(
                 () -> new EntityNotFoundException("Anunciante não encontrado")
 
         );
@@ -54,6 +54,12 @@ public class AnuncianteService {
         if (!anuncianteRepository.findAnuncianteByTelefone(registerAdvertiserDTO.telefone()).isEmpty()){
             throw new EntityExistsException("Este registro já existe no banco!");
         }
+
+        if(!anuncianteRepository.findAnuncianteByEmail(registerAdvertiserDTO.email()).isEmpty()){
+            throw new EntityExistsException("Este registro já existe no banco!");
+        }
+
+
         return anuncianteRepository.save(registerAdvertiserDTO.toAnunciante());
     }
 

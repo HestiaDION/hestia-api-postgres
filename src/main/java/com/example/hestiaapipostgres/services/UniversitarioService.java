@@ -27,8 +27,8 @@ public class UniversitarioService {
         return universitarioRepository.findAll();
     }
 
-    public UniversitarioProfileInfo getInfoProfileByUniversity(UUID id){
-        Universitario universitarioProfileInfo = universitarioRepository.findUniversitarioById(id).orElseThrow(
+    public UniversitarioProfileInfo getInfoProfileByUniversity(String email){
+        Universitario universitarioProfileInfo = universitarioRepository.findUniversitarioByEmail(email).orElseThrow(
                 () -> new EntityNotFoundException("Univesitário não encontrado")
 
         );
@@ -55,6 +55,12 @@ public class UniversitarioService {
         if (!universitarioRepository.findUniversitarioByDne(registerUniversityDTO.dne()).isEmpty()){
             throw new EntityExistsException("Este registro já existe no banco!");
         }
+
+        if(!universitarioRepository.findUniversitarioByEmail(registerUniversityDTO.email()).isEmpty()){
+            throw new EntityExistsException("Este registro já existe no banco!");
+        }
+
+
         return universitarioRepository.save(registerUniversityDTO.toUniversity());
     }
 
