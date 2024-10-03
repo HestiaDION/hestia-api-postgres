@@ -56,10 +56,10 @@ public class AnuncianteController {
 
 
     //         =-=-=-= PATCH =-=-==-
-    @PatchMapping("/updateProfile/{id}")
-    public ResponseEntity<Anunciante> updateAdvertiser(@PathVariable UUID id, @Valid @RequestBody UpdateAdvertiserDTO updateAdvertiserDTO){
+    @PatchMapping("/updateProfile/{email}")
+    public ResponseEntity<Anunciante> updateAdvertiser(@PathVariable String email, @Valid @RequestBody UpdateAdvertiserDTO updateAdvertiserDTO){
 
-        Anunciante anunciante = anuncianteService.updateAdvertiser(id, updateAdvertiserDTO);
+        Anunciante anunciante = anuncianteService.updateAdvertiser(email, updateAdvertiserDTO);
         return ResponseEntity.status(HttpStatus.OK).body(anunciante);
     }
 

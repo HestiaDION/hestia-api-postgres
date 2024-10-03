@@ -64,9 +64,9 @@ public class AnuncianteService {
     }
 
     // PATCH
-    public Anunciante updateAdvertiser(UUID id, UpdateAdvertiserDTO updateAdvertiserDTO){
+    public Anunciante updateAdvertiser(String email, UpdateAdvertiserDTO updateAdvertiserDTO){
 
-        Optional<Anunciante> anuncianteExistente = anuncianteRepository.findAnuncianteById(id);
+        Optional<Anunciante> anuncianteExistente = anuncianteRepository.findAnuncianteByEmail(email);
         if(anuncianteExistente.isEmpty()){
             throw new EntityNotFoundException("Este registro não existe no banco ou nessa tabela.");
         }

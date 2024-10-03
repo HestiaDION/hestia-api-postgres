@@ -66,9 +66,9 @@ public class UniversitarioService {
 
 
     // PATCH
-    public Universitario updateUniversity(UUID id, UpdateUniversityDTO updateUniversityDTO){
+    public Universitario updateUniversity(String email, UpdateUniversityDTO updateUniversityDTO){
 
-        Optional<Universitario> universitarioExistente = universitarioRepository.findUniversitarioById(id);
+        Optional<Universitario> universitarioExistente = universitarioRepository.findUniversitarioByEmail(email);
         if(universitarioExistente.isEmpty()){
             throw new EntityNotFoundException("Este registro não existe no banco ou nessa tabela.");
         }

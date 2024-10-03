@@ -57,10 +57,10 @@ public class UniversitarioController {
 
     //                   =--==--===- PATCH -==-=-=-=-=-
 
-    @PatchMapping("/updateProfile/{id}")
-    public ResponseEntity<Universitario> updateUniversity(@PathVariable UUID id, @Valid @RequestBody UpdateUniversityDTO updateUniversityDTO){
+    @PatchMapping("/updateProfile/{email}")
+    public ResponseEntity<Universitario> updateUniversity(@PathVariable String email, @Valid @RequestBody UpdateUniversityDTO updateUniversityDTO){
 
-        Universitario universitario = universitarioService.updateUniversity(id, updateUniversityDTO);
+        Universitario universitario = universitarioService.updateUniversity(email, updateUniversityDTO);
 
         return ResponseEntity.status(HttpStatus.OK).body(universitario);
     }
