@@ -32,37 +32,55 @@ public class Universitario {
     @Size(min = 11, max = 11)
     private String telefone;
     private String universidade;
-
     private String genero;
+
+    // adicionando email: linkagem com o fireauth
+    private String email;
+
+    //TODO: implementar plano_id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "plano_id")
+    private Plano plano;
+
 
     public Universitario(){}
 
-    public Universitario(UUID id, LocalDate dt_nascimento, String nome, String dne, String bio, String cidade,
-                         String telefone, String universidade, String genero) {
+    public Universitario(UUID id, LocalDate dt_nascimento, String nome, String dne, String cidade,
+                         String telefone, String universidade, String genero, Plano plano) {
         this.id = id;
         this.dt_nascimento = dt_nascimento;
         this.nome = nome;
         this.dne = dne;
-        this.bio = bio;
         this.cidade = cidade;
         this.telefone = telefone;
         this.universidade = universidade;
         this.genero = genero;
+        this.plano = plano;
 
     }
 
-    public Universitario(LocalDate dt_nascimento, String nome, String dne, String bio, String cidade,
-                         String telefone, String universidade, String genero) {
-        this.dt_nascimento = dt_nascimento;
+
+    // construtor para registro
+    public Universitario(LocalDate dtNascimento, String nome, String dne, String cidade, String telefone, String universidade, String genero, String email) {
+        this.dt_nascimento = dtNascimento;
         this.nome = nome;
         this.dne = dne;
-        this.bio = bio;
         this.cidade = cidade;
         this.telefone = telefone;
         this.universidade = universidade;
         this.genero = genero;
-
+        this.email = email;
     }
+
+
+    // construtor para comsulta de perfil
+    public Universitario(String nome, String bio, String cidade, String telefone) {
+        this.nome = nome;
+        this.bio = bio;
+        this.cidade = cidade;
+        this.telefone = telefone;
+    }
+
 
 
     public String getGenero() {
@@ -135,5 +153,21 @@ public class Universitario {
 
     public void setUniversidade(String universidade) {
         this.universidade = universidade;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Plano getPlano() {
+        return plano;
+    }
+
+    public void setPlano(Plano plano) {
+        this.plano = plano;
     }
 }
