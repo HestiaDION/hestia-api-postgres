@@ -59,7 +59,6 @@ public class AnuncianteService {
             throw new EntityExistsException("Este registro já existe no banco!");
         }
 
-
         return anuncianteRepository.save(registerAdvertiserDTO.toAnunciante());
     }
 
@@ -77,9 +76,6 @@ public class AnuncianteService {
         // verificando os campos, já que não há obrigatoriedade em atualizar todos eles juntos
         if(updateAdvertiserDTO.cidade() != null && !updateAdvertiserDTO.cidade().isEmpty()){
             anunciante.setCidade(updateAdvertiserDTO.cidade());
-        }
-        if((updateAdvertiserDTO.telefone() != null && !(updateAdvertiserDTO.telefone().isEmpty()))){
-            anunciante.setTelefone((updateAdvertiserDTO.telefone()));
         }
         if((updateAdvertiserDTO.bio() != null && !(updateAdvertiserDTO.bio().isEmpty()))){
             anunciante.setBio((updateAdvertiserDTO.bio()));

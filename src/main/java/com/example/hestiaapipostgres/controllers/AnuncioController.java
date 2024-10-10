@@ -33,7 +33,7 @@ public class AnuncioController {
     public ResponseEntity<Anuncio> registerAd(@Valid @RequestBody Anuncio registerAd){
 
         Anuncio anuncio = anuncioService.registerAd(registerAd);
-        return ResponseEntity.status(HttpStatus.CREATED).body(registerAd);
+        return ResponseEntity.status(HttpStatus.CREATED).body(anuncio);
 
     }
 

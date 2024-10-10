@@ -1,7 +1,5 @@
 package com.example.hestiaapipostgres.controllers;
-
 import com.example.hestiaapipostgres.dto.InfoUserDTO;
-import com.example.hestiaapipostgres.repository.UsuarioRepository;
 import com.example.hestiaapipostgres.services.UsuarioService;
 
 import org.springframework.http.ResponseEntity;

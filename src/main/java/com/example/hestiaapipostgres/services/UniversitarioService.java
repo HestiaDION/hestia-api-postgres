@@ -53,7 +53,7 @@ public class UniversitarioService {
     // POST
     public Universitario registerUniversity(RegisterUniversityDTO registerUniversityDTO) {
 
-        // Verifica se o universitário já existe
+
         if (universitarioRepository.findUniversitarioByDne(registerUniversityDTO.dne()).isPresent()) {
             throw new EntityExistsException("Este registro já existe no banco!");
         }
@@ -62,7 +62,7 @@ public class UniversitarioService {
             throw new EntityExistsException("Este registro já existe no banco!");
         }
 
-        // Chama a procedure para adicionar o universitário
+
         universitarioRepository.addUniversitario(
                 registerUniversityDTO.email(),
                 registerUniversityDTO.nome(),
@@ -72,7 +72,7 @@ public class UniversitarioService {
                 registerUniversityDTO.genero(),
                 registerUniversityDTO.telefone(),
                 registerUniversityDTO.universidade(),
-                "s"
+                "g"
         );
 
         // Retorna o universitário registrado

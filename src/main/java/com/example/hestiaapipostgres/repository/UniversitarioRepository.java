@@ -13,17 +13,17 @@ import java.util.UUID;
 @Repository
 public interface UniversitarioRepository extends JpaRepository<Universitario, UUID> {
 
-    @Procedure(name = "add_universitario", procedureName = "add_universitario")
+    @Procedure(procedureName = "add_universitario")
     void addUniversitario(
-            @Param("p_email") String email,
-            @Param("p_nome") String nome,
-            @Param("p_dt_nascimento") LocalDate dtNascimento,
-            @Param("p_dne") String dne,
-            @Param("p_municipio") String municipio,
-            @Param("p_genero") String genero,
-            @Param("p_telefone") String telefone,
-            @Param("p_universidade") String universidade,
-            @Param("p_bio") String bio
+            @Param("email") String email,
+            @Param("nome") String nome,
+            @Param("dt_nascimento") LocalDate dtNascimento,
+            @Param("dne") String dne,
+            @Param("municipio") String municipio,
+            @Param("genero") String genero,
+            @Param("telefone") String telefone,
+            @Param("universidade") String universidade,
+            @Param("bio") String bio
     );
 
     Optional<Universitario> findUniversitarioById(UUID id);
