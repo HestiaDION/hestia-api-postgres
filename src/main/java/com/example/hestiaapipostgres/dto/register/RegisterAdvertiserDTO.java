@@ -19,7 +19,6 @@ public record RegisterAdvertiserDTO(
         @NotBlank(message = "O e-mail não deve estar em branco")
         @Email(message = "O e-mail fornecido não é válido")
         String email,
-
         @NotNull(message = "A cidade não pode ser nula")
         @NotBlank(message = "A cidade não deve estar em branco")
         String cidade,

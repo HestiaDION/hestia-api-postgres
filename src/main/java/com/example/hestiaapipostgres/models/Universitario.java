@@ -3,17 +3,12 @@ package com.example.hestiaapipostgres.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Size;
-
-import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -28,7 +23,8 @@ public class Universitario {
     private String nome;
     private String dne;
     private String bio;
-    private String cidade;
+    @Column(name="municipio")
+    private String municipio;
     @Size(min = 11, max = 11)
     private String telefone;
     private String universidade;
@@ -45,13 +41,13 @@ public class Universitario {
 
     public Universitario(){}
 
-    public Universitario(UUID id, LocalDate dt_nascimento, String nome, String dne, String cidade,
+    public Universitario(UUID id, LocalDate dt_nascimento, String nome, String dne, String municipio,
                          String telefone, String universidade, String genero, Plano plano) {
         this.id = id;
         this.dt_nascimento = dt_nascimento;
         this.nome = nome;
         this.dne = dne;
-        this.cidade = cidade;
+        this.municipio = municipio;
         this.telefone = telefone;
         this.universidade = universidade;
         this.genero = genero;
@@ -61,11 +57,11 @@ public class Universitario {
 
 
     // construtor para registro
-    public Universitario(LocalDate dtNascimento, String nome, String dne, String cidade, String telefone, String universidade, String genero, String email) {
+    public Universitario(LocalDate dtNascimento, String nome, String dne, String municipio, String telefone, String universidade, String genero, String email) {
         this.dt_nascimento = dtNascimento;
         this.nome = nome;
         this.dne = dne;
-        this.cidade = cidade;
+        this.municipio = municipio;
         this.telefone = telefone;
         this.universidade = universidade;
         this.genero = genero;
@@ -74,10 +70,10 @@ public class Universitario {
 
 
     // construtor para comsulta de perfil
-    public Universitario(String nome, String bio, String cidade, String telefone) {
+    public Universitario(String nome, String bio, String municipio, String telefone) {
         this.nome = nome;
         this.bio = bio;
-        this.cidade = cidade;
+        this.municipio = municipio;
         this.telefone = telefone;
     }
 
@@ -131,12 +127,12 @@ public class Universitario {
         this.bio = bio;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getMunicipio() {
+        return municipio;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setMunicipio(String cidade) {
+        this.municipio = cidade;
     }
 
     public String getTelefone() {

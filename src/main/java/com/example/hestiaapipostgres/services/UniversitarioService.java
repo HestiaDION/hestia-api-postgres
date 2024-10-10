@@ -10,6 +10,7 @@ import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -50,25 +51,40 @@ public class UniversitarioService {
 
 
     // POST
-    public Universitario registerUniversity(RegisterUniversityDTO registerUniversityDTO){
+    public Universitario registerUniversity(RegisterUniversityDTO registerUniversityDTO) {
 
-        if (!universitarioRepository.findUniversitarioByDne(registerUniversityDTO.dne()).isEmpty()){
+
+        if (universitarioRepository.findUniversitarioByDne(registerUniversityDTO.dne()).isPresent()) {
             throw new EntityExistsException("Este registro já existe no banco!");
         }
 
-        if(!universitarioRepository.findUniversitarioByEmail(registerUniversityDTO.email()).isEmpty()){
+        if (universitarioRepository.findUniversitarioByEmail(registerUniversityDTO.email()).isPresent()) {
             throw new EntityExistsException("Este registro já existe no banco!");
         }
 
 
-        return universitarioRepository.save(registerUniversityDTO.toUniversity());
+        universitarioRepository.addUniversitario(
+                registerUniversityDTO.email(),
+                registerUniversityDTO.nome(),
+                registerUniversityDTO.dtNascimento(),
+                registerUniversityDTO.dne(),
+                registerUniversityDTO.municipio(),
+                registerUniversityDTO.genero(),
+                registerUniversityDTO.telefone(),
+                registerUniversityDTO.universidade(),
+                "g"
+        );
+
+        // Retorna o universitário registrado
+        return universitarioRepository.findUniversitarioByEmail(registerUniversityDTO.email())
+                .orElseThrow(() -> new EntityExistsException("Erro ao inserir o universitário"));
     }
 
 
     // PATCH
-    public Universitario updateUniversity(UUID id, UpdateUniversityDTO updateUniversityDTO){
+    public Universitario updateUniversity(String email, UpdateUniversityDTO updateUniversityDTO){
 
-        Optional<Universitario> universitarioExistente = universitarioRepository.findUniversitarioById(id);
+        Optional<Universitario> universitarioExistente = universitarioRepository.findUniversitarioByEmail(email);
         if(universitarioExistente.isEmpty()){
             throw new EntityNotFoundException("Este registro não existe no banco ou nessa tabela.");
         }
@@ -78,7 +94,7 @@ public class UniversitarioService {
         // dar os sets para atualizar
         // verificando os campos, já que não há obrigatoriedade em atualizar todos eles juntos
         if(updateUniversityDTO.cidade() != null && !updateUniversityDTO.cidade().isEmpty()){
-            universitario.setCidade(updateUniversityDTO.cidade());
+            universitario.setMunicipio(updateUniversityDTO.cidade());
         }
         if(updateUniversityDTO.telefone() != null && !updateUniversityDTO.telefone().isEmpty()){
             universitario.setTelefone(updateUniversityDTO.telefone());
