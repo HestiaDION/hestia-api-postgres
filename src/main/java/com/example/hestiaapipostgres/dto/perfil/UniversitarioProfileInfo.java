@@ -1,4 +1,4 @@
-package com.example.hestiaapipostgres.dto;
+package com.example.hestiaapipostgres.dto.perfil;
 
 import java.time.LocalDate;
 
