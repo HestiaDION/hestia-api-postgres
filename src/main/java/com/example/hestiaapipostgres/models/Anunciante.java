@@ -17,7 +17,9 @@ public class Anunciante {
     private String bio;
     private LocalDate dt_nascimento;
     private String telefone;
-    private String cidade;
+
+    @Column(name="municipio")
+    private String municipio;
     private String genero;
     //TODO: implementar plano_id
     public Anunciante(){}
@@ -27,7 +29,7 @@ public class Anunciante {
         this.bio = bio;
         this.dt_nascimento = dt_nascimento;
         this.telefone = telefone;
-        this.cidade = cidade;
+        this.municipio = cidade;
         this.genero = genero;
         this.email = email;
 
@@ -35,7 +37,7 @@ public class Anunciante {
 
     public Anunciante(String nome, String cidade, String telefone, LocalDate dtNascimento, String genero, String email) {
         this.nome = nome;
-        this.cidade = cidade;
+        this.municipio = cidade;
         this.telefone = telefone;
         this.genero = genero;
         this.dt_nascimento = dtNascimento;
@@ -82,12 +84,12 @@ public class Anunciante {
         this.telefone = telefone;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getMunicipio() {
+        return municipio;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setMunicipio(String cidade) {
+        this.municipio = cidade;
     }
 
     public String getGenero() {
@@ -107,11 +109,5 @@ public class Anunciante {
         this.email = email;
     }
 
-    public LocalDate getDt_nascimento() {
-        return dt_nascimento;
-    }
 
-    public void setDt_nascimento(LocalDate dt_nascimento) {
-        this.dt_nascimento = dt_nascimento;
-    }
 }

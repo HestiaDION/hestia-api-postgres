@@ -1,4 +1,4 @@
-package com.example.hestiaapipostgres.repository;
+package com.example.hestiaapipostgres.repositories;
 
 import com.example.hestiaapipostgres.models.Anuncio;
 import org.springframework.data.jpa.repository.JpaRepository;

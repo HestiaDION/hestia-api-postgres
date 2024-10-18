@@ -4,13 +4,12 @@ import com.example.hestiaapipostgres.dto.register.RegisterUniversityDTO;
 import com.example.hestiaapipostgres.dto.perfil.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.dto.update.UpdateUniversityDTO;
 import com.example.hestiaapipostgres.models.Universitario;
-import com.example.hestiaapipostgres.repository.UniversitarioRepository;
+import com.example.hestiaapipostgres.repositories.UniversitarioRepository;
 import jakarta.persistence.EntityExistsException;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -62,7 +61,6 @@ public class UniversitarioService {
             throw new EntityExistsException("Este registro já existe no banco!");
         }
 
-
         universitarioRepository.addUniversitario(
                 registerUniversityDTO.email(),
                 registerUniversityDTO.nome(),
@@ -72,7 +70,7 @@ public class UniversitarioService {
                 registerUniversityDTO.genero(),
                 registerUniversityDTO.telefone(),
                 registerUniversityDTO.universidade(),
-                "g"
+                ""
         );
 
         // Retorna o universitário registrado
@@ -86,7 +84,7 @@ public class UniversitarioService {
 
         Optional<Universitario> universitarioExistente = universitarioRepository.findUniversitarioByEmail(email);
         if(universitarioExistente.isEmpty()){
-            throw new EntityNotFoundException("Este registro não existe no banco ou nessa tabela.");
+            throw new EntityNotFoundException("Este registro não existe no banco ou nessa tabela: "+ email);
         }
 
         Universitario universitario = universitarioExistente.get();

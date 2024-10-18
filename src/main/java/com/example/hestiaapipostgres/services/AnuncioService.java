@@ -1,7 +1,7 @@
 package com.example.hestiaapipostgres.services;
 
 import com.example.hestiaapipostgres.models.Anuncio;
-import com.example.hestiaapipostgres.repository.AnuncioRepository;
+import com.example.hestiaapipostgres.repositories.AnuncioRepository;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
 
