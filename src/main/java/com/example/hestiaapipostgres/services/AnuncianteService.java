@@ -5,7 +5,7 @@ import com.example.hestiaapipostgres.dto.register.RegisterAdvertiserDTO;
 import com.example.hestiaapipostgres.dto.update.UpdateAdvertiserDTO;
 import com.example.hestiaapipostgres.dto.perfil.AnuncianteProfileInfo;
 import com.example.hestiaapipostgres.models.Anunciante;
-import com.example.hestiaapipostgres.repository.AnuncianteRepository;
+import com.example.hestiaapipostgres.repositories.AnuncianteRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -59,7 +59,20 @@ public class AnuncianteService {
             throw new EntityExistsException("Este registro já existe no banco!");
         }
 
-        return anuncianteRepository.save(registerAdvertiserDTO.toAnunciante());
+        anuncianteRepository.addAnunciante(
+                registerAdvertiserDTO.email(),
+                registerAdvertiserDTO.nome(),
+                registerAdvertiserDTO.dtNascimento(),
+                "",
+                registerAdvertiserDTO.telefone(),
+                registerAdvertiserDTO.genero(),
+                registerAdvertiserDTO.municipio()
+        );
+
+
+        // retorna o anunciante inserido
+        return anuncianteRepository.findAnuncianteByEmail(registerAdvertiserDTO.email())
+                .orElseThrow(() -> new EntityExistsException("Erro ao inserir o anunciante"));
     }
 
     // PATCH
@@ -75,7 +88,7 @@ public class AnuncianteService {
         // dar os sets para atualizar
         // verificando os campos, já que não há obrigatoriedade em atualizar todos eles juntos
         if(updateAdvertiserDTO.cidade() != null && !updateAdvertiserDTO.cidade().isEmpty()){
-            anunciante.setCidade(updateAdvertiserDTO.cidade());
+            anunciante.setMunicipio(updateAdvertiserDTO.cidade());
         }
         if((updateAdvertiserDTO.bio() != null && !(updateAdvertiserDTO.bio().isEmpty()))){
             anunciante.setBio((updateAdvertiserDTO.bio()));

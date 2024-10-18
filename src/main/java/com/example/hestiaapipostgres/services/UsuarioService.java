@@ -2,7 +2,7 @@ package com.example.hestiaapipostgres.services;
 
 
 import com.example.hestiaapipostgres.dto.InfoUserDTO;
-import com.example.hestiaapipostgres.repository.UsuarioRepository;
+import com.example.hestiaapipostgres.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
