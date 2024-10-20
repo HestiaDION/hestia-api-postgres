@@ -37,6 +37,9 @@ public class Anunciante {
     @Size(min = 2, max = 2)
     private String prefixo;
 
+    @Column(name="tipo_conta")
+    private String tipo_conta;
+
     //TODO: implementar plano_id
     public Anunciante(){}
     public Anunciante(UUID id, String nome, String bio, LocalDate dt_nascimento, String telefone, String cidade, String genero, String email) {
@@ -131,5 +134,13 @@ public class Anunciante {
 
     public void setPrefixo(String prefixo) {
         this.prefixo = prefixo;
+    }
+
+    public String getTipo_conta() {
+        return tipo_conta;
+    }
+
+    public void setTipo_conta(String tipo_conta) {
+        this.tipo_conta = tipo_conta;
     }
 }

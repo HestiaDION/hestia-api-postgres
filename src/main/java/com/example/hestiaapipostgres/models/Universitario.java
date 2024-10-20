@@ -48,6 +48,8 @@ public class Universitario {
 
     @Size(min = 2, max = 2)
     private String prefixo;
+    @Column(name="tipo_conta")
+    private String tipo_conta;
 
     //TODO: implementar plano_id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -189,5 +191,13 @@ public class Universitario {
 
     public void setPrefixo(String prefixo) {
         this.prefixo = prefixo;
+    }
+
+    public String getTipo_conta() {
+        return tipo_conta;
+    }
+
+    public void setTipo_conta(String tipo_conta) {
+        this.tipo_conta = tipo_conta;
     }
 }

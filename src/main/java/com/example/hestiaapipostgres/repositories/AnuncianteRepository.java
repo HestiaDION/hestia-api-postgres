@@ -22,7 +22,8 @@ public interface AnuncianteRepository extends JpaRepository<Anunciante, UUID> {
             @Param("telefone") String telefone,
             @Param("genero") String genero,
             @Param("municipio") String universidade,
-            @Param("prefixo") String prefixo
+            @Param("prefixo") String prefixo,
+            @Param("tipo_conta") String tipoConta
 
     );
 
