@@ -1,6 +1,8 @@
 package com.example.hestiaapipostgres.models;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -11,16 +13,30 @@ public class Anunciante {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false, nullable = false)
+    @Schema(description = "Representa o id do anunciante", example = "123e4567-e89b-12d3-a456-426614174000")
     private UUID id;
+    @Schema(description = "Representa o nome do anunciante", example = "Sophie Kumagai")
     private String nome;
+    @Schema(description = "Representa o e-mail do anunciante", example = "sophie@hotmail.com")
     private String email;
+    @Schema(description = "Representa a biografia do anunciante. É somente requisitada no UPDATE.", example = "Olá, sou o anunciante Fulano!")
     private String bio;
+    @Schema(description = "Data de nascimento do anunciante. Deve estar no formato YYYY-MM-DD", example = "2000-03-03")
     private LocalDate dt_nascimento;
+
+    @Size(min = 11, max = 11)
+    @Schema(description = "Representa o telefone do anunciante. Deve estar apenas em números.", example = "11958987896")
     private String telefone;
 
+    @Schema(description = "Representa a cidade do anunciante.", example = "Guarulhos")
     @Column(name="municipio")
     private String municipio;
+    @Schema(description = "Representa o gênero do anunciante", example = "Feminino")
     private String genero;
+
+    @Size(min = 2, max = 2)
+    private String prefixo;
+
     //TODO: implementar plano_id
     public Anunciante(){}
     public Anunciante(UUID id, String nome, String bio, LocalDate dt_nascimento, String telefone, String cidade, String genero, String email) {
@@ -109,5 +125,11 @@ public class Anunciante {
         this.email = email;
     }
 
+    public String getPrefixo() {
+        return prefixo;
+    }
 
+    public void setPrefixo(String prefixo) {
+        this.prefixo = prefixo;
+    }
 }

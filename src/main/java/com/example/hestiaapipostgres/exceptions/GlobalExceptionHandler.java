@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
         CustomErrorResponse errorResponse = new CustomErrorResponse(
                 REGISTER_ALREADY_EXISTS,
                 ex.getMessage(),
-                HttpStatus.NOT_FOUND.value()
+                HttpStatus.BAD_REQUEST.value()
         );
 
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);

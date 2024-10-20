@@ -21,9 +21,11 @@ public interface UniversitarioRepository extends JpaRepository<Universitario, UU
             @Param("dne") String dne,
             @Param("municipio") String municipio,
             @Param("genero") String genero,
+            @Param("prefixo") String prefixo,
             @Param("telefone") String telefone,
             @Param("universidade") String universidade,
             @Param("bio") String bio
+
     );
 
     Optional<Universitario> findUniversitarioById(UUID id);

@@ -1,6 +1,7 @@
 package com.example.hestiaapipostgres.models;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
@@ -17,21 +18,36 @@ public class Universitario {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false, nullable = false)
+    @Schema(description = "Representa o id do universitário", example = "123e4567-e89b-12d3-a456-426614174000")
     private UUID id;
+
+    @Schema(description = "Data de nascimento do universitário. Deve estar no formato YYYY-MM-DD", example = "2000-03-03")
     private LocalDate dt_nascimento;
     @Size(min = 3)
+    @Schema(description = "Representa o nome do universitário", example = "Laura Farias")
     private String nome;
+    @Schema(description = "Representa o Documento Nacional do Estudante (DNE) do universitário.", example = "USP")
     private String dne;
+    @Schema(description = "Representa a biografia do universitário. É somente requisitada no UPDATE.", example = "Olá, sou o universitário Fulano!")
     private String bio;
     @Column(name="municipio")
+    @Schema(description = "Representa a cidade do universitário.", example = "Guarulhos")
     private String municipio;
     @Size(min = 11, max = 11)
+    @Schema(description = "Representa o telefone do universitário. Deve estar apenas em números.", example = "11958987896")
     private String telefone;
+    @Schema(description = "Representa a universidade do universitário.", example = "USP")
     private String universidade;
+
+    @Schema(description = "Representa o gênero do universitário", example = "Masculino")
     private String genero;
 
     // adicionando email: linkagem com o fireauth
+    @Schema(description = "Representa o e-mail do universitário", example = "laura@gmail.com")
     private String email;
+
+    @Size(min = 2, max = 2)
+    private String prefixo;
 
     //TODO: implementar plano_id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -165,5 +181,13 @@ public class Universitario {
 
     public void setPlano(Plano plano) {
         this.plano = plano;
+    }
+
+    public String getPrefixo() {
+        return prefixo;
+    }
+
+    public void setPrefixo(String prefixo) {
+        this.prefixo = prefixo;
     }
 }
