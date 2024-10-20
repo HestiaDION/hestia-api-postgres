@@ -4,6 +4,7 @@ package com.example.hestiaapipostgres.services;
 import com.example.hestiaapipostgres.dto.InfoUserDTO;
 import com.example.hestiaapipostgres.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +16,7 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
+    @Cacheable(value="cacheUserOrigin", key="#email")
     public InfoUserDTO findUserOriginByEmail(String email){
         InfoUserDTO infoUserDTO = usuarioRepository.findUserOriginByEmail(email).orElseThrow(
 

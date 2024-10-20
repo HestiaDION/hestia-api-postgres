@@ -8,6 +8,8 @@ import com.example.hestiaapipostgres.models.Anunciante;
 import com.example.hestiaapipostgres.repositories.AnuncianteRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +35,9 @@ public class AnuncianteService {
         return anuncianteRepository.findAll();
     }
 
+
+    // Implementação para redis
+    @Cacheable(value = "cacheAdvertiserProfile", key = "#email")
     public AnuncianteProfileInfo getInfoProfileByAdvertiser(String email){
         Anunciante anuncianteProfileInfo = anuncianteRepository.findAnuncianteByEmail(email).orElseThrow(
                 () -> new EntityNotFoundException("Anunciante não encontrado")
@@ -66,7 +71,8 @@ public class AnuncianteService {
                 "",
                 registerAdvertiserDTO.telefone(),
                 registerAdvertiserDTO.genero(),
-                registerAdvertiserDTO.municipio()
+                registerAdvertiserDTO.municipio(),
+                "55"
         );
 
 
@@ -76,6 +82,8 @@ public class AnuncianteService {
     }
 
     // PATCH
+    @CacheEvict(value = "cacheUniversityProfile", key= "#email")
+
     public Anunciante updateAdvertiser(String email, UpdateAdvertiserDTO updateAdvertiserDTO){
 
         Optional<Anunciante> anuncianteExistente = anuncianteRepository.findAnuncianteByEmail(email);

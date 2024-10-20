@@ -8,6 +8,8 @@ import com.example.hestiaapipostgres.repositories.UniversitarioRepository;
 import jakarta.persistence.EntityExistsException;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +29,7 @@ public class UniversitarioService {
         return universitarioRepository.findAll();
     }
 
+    @Cacheable(value = "cacheUniversityProfile", key="#email")
     public UniversitarioProfileInfo getInfoProfileByUniversity(String email){
         Universitario universitarioProfileInfo = universitarioRepository.findUniversitarioByEmail(email).orElseThrow(
                 () -> new EntityNotFoundException("Univesitário não encontrado")
@@ -68,6 +71,7 @@ public class UniversitarioService {
                 registerUniversityDTO.dne(),
                 registerUniversityDTO.municipio(),
                 registerUniversityDTO.genero(),
+                "55",
                 registerUniversityDTO.telefone(),
                 registerUniversityDTO.universidade(),
                 ""
@@ -80,6 +84,7 @@ public class UniversitarioService {
 
 
     // PATCH
+    @CacheEvict(value = "cacheUniversityProfile", key= "#email")
     public Universitario updateUniversity(String email, UpdateUniversityDTO updateUniversityDTO){
 
         Optional<Universitario> universitarioExistente = universitarioRepository.findUniversitarioByEmail(email);
