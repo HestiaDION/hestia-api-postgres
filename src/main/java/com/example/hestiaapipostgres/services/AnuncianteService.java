@@ -20,6 +20,8 @@ import java.util.UUID;
 public class AnuncianteService {
 
     private final AnuncianteRepository anuncianteRepository;
+    private final String USER_TYPE_DEFAULT = "USER";
+    private final String DEFAULT_PREFIX = "55";
 
     public AnuncianteService(AnuncianteRepository anuncianteRepository) {
         this.anuncianteRepository = anuncianteRepository;
@@ -72,7 +74,8 @@ public class AnuncianteService {
                 registerAdvertiserDTO.telefone(),
                 registerAdvertiserDTO.genero(),
                 registerAdvertiserDTO.municipio(),
-                "55"
+                DEFAULT_PREFIX,
+                USER_TYPE_DEFAULT
         );
 
 

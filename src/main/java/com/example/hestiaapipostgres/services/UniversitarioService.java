@@ -20,6 +20,8 @@ import java.util.UUID;
 public class UniversitarioService {
 
     private final UniversitarioRepository universitarioRepository;
+    private final String USER_TYPE_DEFAULT = "USER";
+    private final String DEFAULT_PREFIX = "55";
 
     public UniversitarioService(UniversitarioRepository universitarioRepository){
         this.universitarioRepository = universitarioRepository;
@@ -71,10 +73,12 @@ public class UniversitarioService {
                 registerUniversityDTO.dne(),
                 registerUniversityDTO.municipio(),
                 registerUniversityDTO.genero(),
-                "55",
+                DEFAULT_PREFIX,
                 registerUniversityDTO.telefone(),
                 registerUniversityDTO.universidade(),
-                ""
+                "",
+                USER_TYPE_DEFAULT
+
         );
 
         // Retorna o universitário registrado

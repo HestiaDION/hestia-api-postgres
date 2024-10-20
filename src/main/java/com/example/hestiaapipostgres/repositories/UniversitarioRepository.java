@@ -24,7 +24,8 @@ public interface UniversitarioRepository extends JpaRepository<Universitario, UU
             @Param("prefixo") String prefixo,
             @Param("telefone") String telefone,
             @Param("universidade") String universidade,
-            @Param("bio") String bio
+            @Param("bio") String bio,
+            @Param("tipo_conta") String tipoConta
 
     );
 
