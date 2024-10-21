@@ -42,7 +42,6 @@ public class Universitario {
     @Schema(description = "Representa o gênero do universitário", example = "Masculino")
     private String genero;
 
-    // adicionando email: linkagem com o fireauth
     @Schema(description = "Representa o e-mail do universitário", example = "laura@gmail.com")
     private String email;
 
@@ -51,7 +50,6 @@ public class Universitario {
     @Column(name="tipo_conta")
     private String tipo_conta;
 
-    //TODO: implementar plano_id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plano_id")
     private Plano plano;
@@ -75,7 +73,7 @@ public class Universitario {
 
 
     // construtor para registro
-    public Universitario(LocalDate dtNascimento, String nome, String dne, String municipio, String telefone, String universidade, String genero, String email) {
+    public Universitario(LocalDate dtNascimento, String nome, String dne, String municipio, String telefone, String universidade, String genero, String email, String tipoConta) {
         this.dt_nascimento = dtNascimento;
         this.nome = nome;
         this.dne = dne;
@@ -84,6 +82,7 @@ public class Universitario {
         this.universidade = universidade;
         this.genero = genero;
         this.email = email;
+        this.tipo_conta = tipoConta;
     }
 
 

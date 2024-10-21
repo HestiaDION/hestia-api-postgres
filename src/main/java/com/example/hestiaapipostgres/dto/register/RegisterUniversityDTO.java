@@ -51,7 +51,8 @@ public record RegisterUniversityDTO(
                         this.telefone,
                         this.universidade,
                         this.genero,
-                        this.email
+                        this.email,
+                        "USER"
 
                 );
 

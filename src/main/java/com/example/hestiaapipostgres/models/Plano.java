@@ -15,9 +15,10 @@ public class Plano {
     private String tipo_plano;
     private String info;
     private double valor;
-
     @OneToMany(mappedBy = "plano") // Relacionamento inverso
     private List<Universitario> universitarios;
+    @OneToMany(mappedBy = "plano")
+    private List<Anunciante> anunciantes;
 
     public Plano(){}
     public Plano(UUID id, String tipo_plano, String info, double valor){

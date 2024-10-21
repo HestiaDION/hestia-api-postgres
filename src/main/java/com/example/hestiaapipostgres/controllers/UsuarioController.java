@@ -21,4 +21,5 @@ public class UsuarioController {
      public ResponseEntity<InfoUserDTO> findUserOriginByEmail(@PathVariable String email){
          return ResponseEntity.ok().body(usuarioService.findUserOriginByEmail(email));
      }
+
 }
