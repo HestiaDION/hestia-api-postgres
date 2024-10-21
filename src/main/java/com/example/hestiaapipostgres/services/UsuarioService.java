@@ -5,6 +5,7 @@ import com.example.hestiaapipostgres.dto.InfoUserDTO;
 import com.example.hestiaapipostgres.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,12 +17,13 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    @Cacheable(value="cacheUserOrigin", key="#email")
+//    @Cacheable(value="cacheUserOrigin", key="#email")
     public InfoUserDTO findUserOriginByEmail(String email){
         InfoUserDTO infoUserDTO = usuarioRepository.findUserOriginByEmail(email).orElseThrow(
 
                 () -> new EntityNotFoundException("Este e-mail não existe em nenhuma das duas tabelas.")
         );
+        System.out.println(infoUserDTO);
         return infoUserDTO;
     }
 }

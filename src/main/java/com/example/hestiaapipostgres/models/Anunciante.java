@@ -40,7 +40,10 @@ public class Anunciante {
     @Column(name="tipo_conta")
     private String tipo_conta;
 
-    //TODO: implementar plano_id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "plano_id")
+    private Plano plano;
+
     public Anunciante(){}
     public Anunciante(UUID id, String nome, String bio, LocalDate dt_nascimento, String telefone, String cidade, String genero, String email) {
         this.id = id;
@@ -54,13 +57,14 @@ public class Anunciante {
 
     }
 
-    public Anunciante(String nome, String cidade, String telefone, LocalDate dtNascimento, String genero, String email) {
+    public Anunciante(String nome, String cidade, String telefone, LocalDate dtNascimento, String genero, String email, String tipoConta) {
         this.nome = nome;
         this.municipio = cidade;
         this.telefone = telefone;
         this.genero = genero;
         this.dt_nascimento = dtNascimento;
         this.email = email;
+        this.tipo_conta = tipoConta;
     }
 
     public UUID getId() {
@@ -142,5 +146,13 @@ public class Anunciante {
 
     public void setTipo_conta(String tipo_conta) {
         this.tipo_conta = tipo_conta;
+    }
+
+    public Plano getPlano() {
+        return plano;
+    }
+
+    public void setPlano(Plano plano) {
+        this.plano = plano;
     }
 }

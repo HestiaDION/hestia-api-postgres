@@ -54,7 +54,7 @@ public class AnuncianteController {
         return anuncianteService.listAdvertiserById(id);
     }
 
-    @GetMapping("findAll")
+    @GetMapping("listAll")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     @Operation(summary = "Listagem de todos os anunciantes",
             description = "Listagem completa de todos os anunciantes registrados na base, com todas as suas informações.")

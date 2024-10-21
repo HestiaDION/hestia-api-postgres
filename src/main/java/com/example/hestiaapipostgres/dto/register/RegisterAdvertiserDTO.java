@@ -44,7 +44,8 @@ public record RegisterAdvertiserDTO(
                this.telefone,
                this.dtNascimento,
                this.genero,
-               this.email
+               this.email,
+               "USER"
        );
     }
 }

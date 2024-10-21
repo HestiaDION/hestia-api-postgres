@@ -10,7 +10,8 @@ public record InfoUserDTO(
         @NotNull(message = "O e-mail não pode estar vazio")
         @Email(message = "O e-mail fornecido não é válido")
         String email,
-        String origem
+        String origem,
+        String tipoConta
 ) implements Serializable{
         private static final long serialVersionUID = 1L;
 }
