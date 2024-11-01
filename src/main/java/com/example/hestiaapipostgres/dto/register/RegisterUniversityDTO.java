@@ -15,7 +15,6 @@ public record RegisterUniversityDTO(
         @NotBlank(message = "O nome não deve estar em branco")
         @Size(message="O nome deve ter no mínimo 3 caracteres", min = 3)
         String nome,
-
         @NotNull(message = "o e-mail não pode ser nulo")
         @NotBlank(message = "O e-mail não deve estar em branco")
         @Email(message = "O e-mail fornecido não á válido")
@@ -23,9 +22,9 @@ public record RegisterUniversityDTO(
         @NotNull(message = "A DNE não pode ser nula")
         @NotBlank(message = "O nome não deve estar em branco")
         String dne,
-        @NotNull(message = "A cidade não pode ser nulo")
+        @NotNull(message = "O município não pode ser nulo")
         @NotBlank(message = "O nome não deve estar em branco")
-        String cidade,
+        String municipio,
         @NotNull(message = "O telefone não pode ser nulo")
         @NotBlank(message = "O telefone não deve estar em branco")
         @Size(message="O tamanho do telefone deve ser de 11 caracteres", min = 11, max = 11)
@@ -48,11 +47,12 @@ public record RegisterUniversityDTO(
                        this.dtNascimento,
                         this.nome,
                         this.dne,
-                        this.cidade,
+                        this.municipio,
                         this.telefone,
                         this.universidade,
                         this.genero,
-                        this.email
+                        this.email,
+                        "USER"
 
                 );
 

@@ -19,10 +19,9 @@ public record RegisterAdvertiserDTO(
         @NotBlank(message = "O e-mail não deve estar em branco")
         @Email(message = "O e-mail fornecido não é válido")
         String email,
-
         @NotNull(message = "A cidade não pode ser nula")
-        @NotBlank(message = "A cidade não deve estar em branco")
-        String cidade,
+        @NotBlank(message = "O município não deve estar em branco")
+        String municipio,
         @NotNull(message = "O telefone não pode ser nulo")
         @NotBlank(message = "O telefone não deve estar em branco")
         @Size(message="O tamanho do telefone deve ser de 11 caracteres", min = 11, max = 11)
@@ -41,13 +40,12 @@ public record RegisterAdvertiserDTO(
 
        return new Anunciante(
                this.nome,
-               this.cidade,
+               this.municipio,
                this.telefone,
                this.dtNascimento,
                this.genero,
-               this.email
-
+               this.email,
+               "USER"
        );
-
     }
 }

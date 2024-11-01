@@ -4,10 +4,12 @@ import com.example.hestiaapipostgres.dto.register.RegisterUniversityDTO;
 import com.example.hestiaapipostgres.dto.perfil.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.dto.update.UpdateUniversityDTO;
 import com.example.hestiaapipostgres.models.Universitario;
-import com.example.hestiaapipostgres.repository.UniversitarioRepository;
+import com.example.hestiaapipostgres.repositories.UniversitarioRepository;
 import jakarta.persistence.EntityExistsException;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +20,8 @@ import java.util.UUID;
 public class UniversitarioService {
 
     private final UniversitarioRepository universitarioRepository;
+    private final String USER_TYPE_DEFAULT = "USER";
+    private final String DEFAULT_PREFIX = "55";
 
     public UniversitarioService(UniversitarioRepository universitarioRepository){
         this.universitarioRepository = universitarioRepository;
@@ -27,6 +31,7 @@ public class UniversitarioService {
         return universitarioRepository.findAll();
     }
 
+    @Cacheable(value = "cacheUniversityProfile", key="#email")
     public UniversitarioProfileInfo getInfoProfileByUniversity(String email){
         Universitario universitarioProfileInfo = universitarioRepository.findUniversitarioByEmail(email).orElseThrow(
                 () -> new EntityNotFoundException("Univesitário não encontrado")
@@ -50,27 +55,45 @@ public class UniversitarioService {
 
 
     // POST
-    public Universitario registerUniversity(RegisterUniversityDTO registerUniversityDTO){
+    public Universitario registerUniversity(RegisterUniversityDTO registerUniversityDTO) {
 
-        if (!universitarioRepository.findUniversitarioByDne(registerUniversityDTO.dne()).isEmpty()){
+
+        if (universitarioRepository.findUniversitarioByDne(registerUniversityDTO.dne()).isPresent()) {
             throw new EntityExistsException("Este registro já existe no banco!");
         }
 
-        if(!universitarioRepository.findUniversitarioByEmail(registerUniversityDTO.email()).isEmpty()){
+        if (universitarioRepository.findUniversitarioByEmail(registerUniversityDTO.email()).isPresent()) {
             throw new EntityExistsException("Este registro já existe no banco!");
         }
 
+        universitarioRepository.addUniversitario(
+                registerUniversityDTO.email(),
+                registerUniversityDTO.nome(),
+                registerUniversityDTO.dtNascimento(),
+                registerUniversityDTO.dne(),
+                registerUniversityDTO.municipio(),
+                registerUniversityDTO.genero(),
+                DEFAULT_PREFIX,
+                registerUniversityDTO.telefone(),
+                registerUniversityDTO.universidade(),
+                "",
+                USER_TYPE_DEFAULT
 
-        return universitarioRepository.save(registerUniversityDTO.toUniversity());
+        );
+
+        // Retorna o universitário registrado
+        return universitarioRepository.findUniversitarioByEmail(registerUniversityDTO.email())
+                .orElseThrow(() -> new EntityExistsException("Erro ao inserir o universitário"));
     }
 
 
     // PATCH
-    public Universitario updateUniversity(UUID id, UpdateUniversityDTO updateUniversityDTO){
+    @CacheEvict(value = "cacheUniversityProfile", key= "#email")
+    public Universitario updateUniversity(String email, UpdateUniversityDTO updateUniversityDTO){
 
-        Optional<Universitario> universitarioExistente = universitarioRepository.findUniversitarioById(id);
+        Optional<Universitario> universitarioExistente = universitarioRepository.findUniversitarioByEmail(email);
         if(universitarioExistente.isEmpty()){
-            throw new EntityNotFoundException("Este registro não existe no banco ou nessa tabela.");
+            throw new EntityNotFoundException("Este registro não existe no banco ou nessa tabela: "+ email);
         }
 
         Universitario universitario = universitarioExistente.get();
@@ -78,7 +101,7 @@ public class UniversitarioService {
         // dar os sets para atualizar
         // verificando os campos, já que não há obrigatoriedade em atualizar todos eles juntos
         if(updateUniversityDTO.cidade() != null && !updateUniversityDTO.cidade().isEmpty()){
-            universitario.setCidade(updateUniversityDTO.cidade());
+            universitario.setMunicipio(updateUniversityDTO.cidade());
         }
         if(updateUniversityDTO.telefone() != null && !updateUniversityDTO.telefone().isEmpty()){
             universitario.setTelefone(updateUniversityDTO.telefone());

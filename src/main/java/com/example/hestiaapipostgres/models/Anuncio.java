@@ -11,28 +11,19 @@ public class Anuncio {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false, nullable = false)
     private UUID id;
-    private String descricao;
     private String nome;
     private UUID imovel_id;
     private LocalDate dt_inicio;
     private LocalDate dt_termino;
     private double aluguel;
+
     @ManyToOne
     @JoinColumn(name = "anunciante_id", nullable = false)
     private Anunciante anunciante;
-    // TODO: implementar anunciante_id
-    // TODO: implementar imovel_id
-
-    // novos campos adicionados --> confirmar com o pessoal de dados
-
-//    private String regras;
-//    private String restricoes;
 
 
-
-    public Anuncio(UUID id, String descricao, String nome, UUID imovel_id, LocalDate dt_inicio, LocalDate dt_termino, double aluguel, Anunciante anunciante) {
+    public Anuncio(UUID id, String nome, UUID imovel_id, LocalDate dt_inicio, LocalDate dt_termino, double aluguel, Anunciante anunciante) {
         this.id = id;
-        this.descricao = descricao;
         this.nome = nome;
         this.imovel_id = imovel_id;
         this.dt_inicio = dt_inicio;
@@ -48,14 +39,6 @@ public class Anuncio {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public String getNome() {

@@ -1,9 +1,7 @@
 package com.example.hestiaapipostgres.controllers;
-
 import com.example.hestiaapipostgres.dto.InfoUserDTO;
-import com.example.hestiaapipostgres.repository.UsuarioRepository;
 import com.example.hestiaapipostgres.services.UsuarioService;
-import org.apache.coyote.Response;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,4 +21,5 @@ public class UsuarioController {
      public ResponseEntity<InfoUserDTO> findUserOriginByEmail(@PathVariable String email){
          return ResponseEntity.ok().body(usuarioService.findUserOriginByEmail(email));
      }
+
 }
