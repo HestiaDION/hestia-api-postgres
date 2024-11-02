@@ -11,8 +11,13 @@ public class Anuncio {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false, nullable = false)
     private UUID id;
+
     private String nome;
-    private UUID imovel_id;
+
+    @OneToOne
+    @JoinColumn(name = "imovel_id", referencedColumnName = "id", unique = true)
+    private Imovel imovel;
+
     private LocalDate dt_inicio;
     private LocalDate dt_termino;
     private double aluguel;
@@ -22,14 +27,22 @@ public class Anuncio {
     private Anunciante anunciante;
 
 
-    public Anuncio(UUID id, String nome, UUID imovel_id, LocalDate dt_inicio, LocalDate dt_termino, double aluguel, Anunciante anunciante) {
+    public Anuncio(UUID id, String nome, LocalDate dt_inicio, LocalDate dt_termino, double aluguel, Anunciante anunciante, Imovel imovel) {
         this.id = id;
         this.nome = nome;
-        this.imovel_id = imovel_id;
         this.dt_inicio = dt_inicio;
         this.dt_termino = dt_termino;
         this.aluguel = aluguel;
         this.anunciante = anunciante;
+        this.imovel = imovel;
+    }
+
+    public Imovel getImovel() {
+        return imovel;
+    }
+
+    public void setImovel(Imovel imovel) {
+        this.imovel = imovel;
     }
 
     public Anuncio() {}
@@ -47,14 +60,6 @@ public class Anuncio {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public UUID getImovel_id() {
-        return imovel_id;
-    }
-
-    public void setImovel_id(UUID imovel_id) {
-        this.imovel_id = imovel_id;
     }
 
     public LocalDate getDt_inicio() {
