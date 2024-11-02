@@ -45,8 +45,8 @@ public class AnuncioService {
 //        )
 //    }
 
-    public List<ImovelAnuncioDTO>  listAdsPropertiesByAdvertiserId(UUID anuncianteId){
-        return anuncioRepository.findAnunciosImovelByAnuncianteId(anuncianteId);
+    public List<ImovelAnuncioDTO>  listAdsPropertiesByAdvertiserEmail(String emailAnuciante){
+        return anuncioRepository.findAnunciosImovelByAnuncianteEmail(emailAnuciante);
     }
 
     //  POST
