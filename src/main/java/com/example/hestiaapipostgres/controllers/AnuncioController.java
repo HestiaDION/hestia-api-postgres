@@ -36,7 +36,7 @@ public class AnuncioController {
             description = "Listagem completa de todos os anúncios cadastrados na base, independente de seu anunciante.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de anúncios retornada com sucesso.",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = Universitario.class))),
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = Anuncio.class))),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
                     content = @Content())
     })
