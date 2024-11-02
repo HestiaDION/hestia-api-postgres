@@ -1,25 +1,26 @@
 package com.example.hestiaapipostgres.dto.get;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nimbusds.jose.shaded.gson.annotations.SerializedName;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 public record ImovelAnuncioDTO(
-        @SerializedName("imovel_id")
+        @JsonProperty("imovel_id")
         UUID imovelId,
         String regras,
         String descricao,
-        @SerializedName("quantidade_quartos")
+        @JsonProperty("quantidade_quartos")
         int quantidadeQuartos,
-        @SerializedName("universidade_proxima")
+        @JsonProperty("universidade_proxima")
         String universidadadeProxima,
-        @SerializedName("quantidade_maxima_pessoas")
+        @JsonProperty("quantidade_maxima_pessoas")
         int quantidadeMaximaPessoas,
-        @SerializedName("nome")
+        @JsonProperty("nome")
         String nomeAnuncio,
         double aluguel,
-        @SerializedName("dt_inicio")
+        @JsonProperty("dt_inicio")
         LocalDate dtInicio
 
 ) {
