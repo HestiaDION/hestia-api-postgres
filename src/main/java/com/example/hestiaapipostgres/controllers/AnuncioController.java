@@ -1,9 +1,13 @@
 package com.example.hestiaapipostgres.controllers;
 
+import com.example.hestiaapipostgres.dto.get.ImovelAnuncioDTO;
+import com.example.hestiaapipostgres.dto.perfil.AnuncianteProfileInfo;
+import com.example.hestiaapipostgres.dto.perfil.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.dto.register.RegisterAdvertiserDTO;
 import com.example.hestiaapipostgres.dto.register.RegisterAnuncioDTO;
 import com.example.hestiaapipostgres.exceptions.CustomErrorResponse;
 import com.example.hestiaapipostgres.models.Anuncio;
+import com.example.hestiaapipostgres.models.Imovel;
 import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.services.AnuncioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/ad")
@@ -28,7 +33,49 @@ public class AnuncioController {
         this.anuncioService = anuncioService;
     }
 
-    //        =-=-=-=- GET -==--==-
+    //        =-=--=-==--==-=--=-=-==--==-=-=-=- GET -==--==--===--=-==-=--==-=-=-=-=--==-=--=-=
+    @GetMapping("/property/listAllByAdvertiser/{id}")
+    @Operation(summary = "Listagem de imóveis com informações adicionais pelo ID do anunciante",
+            description = "Retorna uma lista com todos os imóveis com informações adicionais pelo ID do anunciante")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de imóveis com informações adicionais pelo ID do anunciante retornada com sucesso",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UniversitarioProfileInfo.class))),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Universitário não encontrado",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class)))
+    })
+    public List<ImovelAnuncioDTO> getImoveisAnunciosPorAnuncianteId(@PathVariable("id") UUID anuncianteId){
+        return anuncioService.listAdsPropertiesByAdvertiserId(anuncianteId);
+    }
+
+    @GetMapping("/property/getPropertyById/{id}")
+    @Operation(summary = "Get de imóvel com informações adicionais por seu ID",
+            description = "Retorna um imóvel com informações adicionais com base em seu ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Imóvel retornado com sucesso",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UniversitarioProfileInfo.class))),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Imóvel não encontrado",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class)))
+    })
+    public ResponseEntity<ImovelAnuncioDTO> getPropertyById(@PathVariable() UUID id){
+        return ResponseEntity.ok().body(anuncioService.getAdPropertyByImovelId(id));
+    }
+
+    @GetMapping("/property/listAll")
+    @Operation(summary = "Listagem de todos os imóveis (quando se clica em 'Mais informações')",
+            description = "Listagem completa de todos os imóveis com informações adicionais.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de imóveis retornada com sucesso.",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ImovelAnuncioDTO.class))),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
+                    content = @Content())
+    })
+    public List<ImovelAnuncioDTO> getImoveisComAnuncios() {
+        return anuncioService.listAllAdsProperties();
+    }
 
     @GetMapping("/listAll")
 //    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
@@ -45,7 +92,7 @@ public class AnuncioController {
     }
 
 
-    //       =--==-=-=- POST =--=--==
+    //        =-=--=-==--==-=--=-=-==--==-=-=-=- POST -==--==--===--=-==-=--==-=-=-=-=--==-=--=-=
 
     @PostMapping("/register")
     @Operation(summary = "Registra um anúncio (moradia)",

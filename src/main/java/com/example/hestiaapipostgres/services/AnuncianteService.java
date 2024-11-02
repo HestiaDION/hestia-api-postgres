@@ -78,7 +78,6 @@ public class AnuncianteService {
                 USER_TYPE_DEFAULT
         );
 
-
         // retorna o anunciante inserido
         return anuncianteRepository.findAnuncianteByEmail(registerAdvertiserDTO.email())
                 .orElseThrow(() -> new EntityExistsException("Erro ao inserir o anunciante"));
