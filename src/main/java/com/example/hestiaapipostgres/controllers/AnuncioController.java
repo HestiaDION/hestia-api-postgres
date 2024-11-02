@@ -45,7 +45,7 @@ public class AnuncioController {
             @ApiResponse(responseCode = "404", description = "Universitário não encontrado",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class)))
     })
-    public List<ImovelAnuncioDTO> getImoveisAnunciosPorAnuncianteId(@PathVariable("email") String emailAnunciante){
+    public List<ImovelAnuncioDTO> getImoveisAnunciosPorAnuncianteEmail(@PathVariable("email") String emailAnunciante){
         return anuncioService.listAdsPropertiesByAdvertiserEmail(emailAnunciante);
     }
 
