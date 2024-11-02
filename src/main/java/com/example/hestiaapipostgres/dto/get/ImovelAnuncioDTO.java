@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public record ImovelAnuncioDTO(
-        @JsonProperty("imovel_id")
+        @JsonProperty("id")
         UUID imovelId,
         String regras,
         String descricao,
