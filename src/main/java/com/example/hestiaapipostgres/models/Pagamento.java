@@ -24,9 +24,7 @@ public class Pagamento {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plano_id")
     private Plano plano;
-    @Schema(description = "Informação referente ao pagamento. Será sempre enviado como false.", example = "false")
-    @Column(name = "pago")
-    private boolean pago;
+
 
     public Pagamento(){}
 
@@ -35,7 +33,6 @@ public class Pagamento {
         this.nomeUsuarioAssinante = nomeUsuarioAssinante;
         this.emailUsuarioAssinante = emailUsuarioAssinante;
         this.plano = plano;
-        this.pago = false;
     }
 
     public UUID getId() {
@@ -70,11 +67,4 @@ public class Pagamento {
         this.plano = plano;
     }
 
-    public boolean isPago() {
-        return pago;
-    }
-
-    public void setPago(boolean pago) {
-        this.pago = pago;
-    }
 }
