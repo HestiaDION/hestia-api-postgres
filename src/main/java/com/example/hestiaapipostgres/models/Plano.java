@@ -1,6 +1,7 @@
 package com.example.hestiaapipostgres.models;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -12,12 +13,13 @@ import java.util.UUID;
 public class Plano {
     @Id
     private UUID id;
-    private String tipo_plano;
     private String info;
     private double valor;
+    @Column(name = "tipo_conta")
     private String tipoConta;
     private String descricao;
 
+    // relacionamentos inversos
     @OneToMany(mappedBy = "plano") // Relacionamento inverso
     private List<Universitario> universitarios;
     @OneToMany(mappedBy = "plano")
@@ -26,16 +28,14 @@ public class Plano {
     private List<Pagamento> pagamentos;
 
     public Plano(){}
-    public Plano(UUID id, String tipo_plano, String info, double valor){
+    public Plano(UUID id, String info, double valor){
         this.id = id;
-        this.tipo_plano = tipo_plano;
         this.info = info;
     }
 
-    public Plano(UUID id, String tipo_plano, String info, double valor, String tipoConta,
+    public Plano(UUID id, String info, double valor, String tipoConta,
                  String descricao, List<Universitario> universitarios, List<Anunciante> anunciantes, List<Pagamento> pagamentos) {
         this.id = id;
-        this.tipo_plano = tipo_plano;
         this.info = info;
         this.valor = valor;
         this.tipoConta = tipoConta;
@@ -51,14 +51,6 @@ public class Plano {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public String getTipoPlano() {
-        return tipo_plano;
-    }
-
-    public void setTipoPlano(String tipo_plano) {
-        this.tipo_plano = tipo_plano;
     }
 
     public String getInfo() {

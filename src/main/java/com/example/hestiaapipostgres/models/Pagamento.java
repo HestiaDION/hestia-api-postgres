@@ -28,6 +28,12 @@ public class Pagamento {
 
     public Pagamento(){}
 
+    public Pagamento(String nomeUsuarioAssinario, String emailUsuarioAssinante, Plano plano){
+        this.nomeUsuarioAssinante = nomeUsuarioAssinario;
+        this.emailUsuarioAssinante = emailUsuarioAssinante;
+        this.plano = plano;
+    }
+
     public Pagamento(UUID id, String nomeUsuarioAssinante, String emailUsuarioAssinante, Plano plano) {
         this.id = id;
         this.nomeUsuarioAssinante = nomeUsuarioAssinante;
