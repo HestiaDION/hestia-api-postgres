@@ -1,5 +1,6 @@
 package com.example.hestiaapipostgres.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
@@ -16,9 +17,11 @@ public class Pagamento {
     private UUID id;
     @Schema(description = "Representa o nome do usuário assinante do plano", example = "Sophie Kumagai")
     @Column(name = "nome")
+    @JsonProperty(value = "nome_usuario_assinante")
     private String nomeUsuarioAssinante;
     @Schema(description = "Representa o e-mail do usuário assinante do plano", example = "Ana Beatriz")
     @Column(name = "email")
+    @JsonProperty(value = "email_usuario_assinante")
     private String emailUsuarioAssinante;
     @Schema(description = "Representa o ID do plano", example = "123e4567-e89b-12d3-a456-426614174000")
     @ManyToOne(fetch = FetchType.LAZY)
