@@ -1,7 +1,6 @@
 package com.example.hestiaapipostgres.controllers;
 
 
-import com.example.hestiaapipostgres.dto.TokenAccess;
 import com.example.hestiaapipostgres.dto.perfil.AnuncianteProfileInfo;
 import com.example.hestiaapipostgres.dto.perfil.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.dto.register.RegisterAdvertiserDTO;
@@ -11,7 +10,6 @@ import com.example.hestiaapipostgres.models.Anunciante;
 
 import com.example.hestiaapipostgres.models.Universitario;
 import com.example.hestiaapipostgres.services.AnuncianteService;
-import com.example.hestiaapipostgres.services.JwtTokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -50,7 +48,7 @@ public class AnuncianteController {
             @ApiResponse(responseCode = "404", description = "Universitário não encontrado",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class)))
     })
-    public Anunciante FindAdvertiserById(@PathVariable UUID id){
+    public Anunciante findAdvertiserById(@PathVariable UUID id){
         return anuncianteService.listAdvertiserById(id);
     }
 
@@ -91,7 +89,7 @@ public class AnuncianteController {
 
     @PostMapping("/register")
     @Operation(summary = "Registro um anunciante",
-            description = "Registra um anunciante no banco de dados")
+            description = "Registra um an'unciante no banco de dados")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Anunciante registrado com sucesso. Retorna o anunciante registrado.",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = RegisterAdvertiserDTO.class))),

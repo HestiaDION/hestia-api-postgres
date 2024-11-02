@@ -8,12 +8,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import com.example.hestiaapipostgres.dto.get.ImovelAnuncioDTO;
 
 @Repository
-
 public interface AnuncioRepository extends JpaRepository<Anuncio, UUID> {
+
 
     @Query(value = "SELECT add_anuncio_imovel_endereco( " +
             "CAST(:emailAnunciante AS TEXT), " +
@@ -52,6 +54,28 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, UUID> {
             @Param("complemento") String complemento,
             @Param("uf") String uf
     );
+
+    @Query("SELECT new com.example.hestiaapipostgres.dto.get.ImovelAnuncioDTO(i.id, i.regras, i.descricao, i.quantidadeQuartos, " +
+            "i.universidadeProxima, i.quantidadeMaximaPessoas, a.nome, a.aluguel, a.dt_inicio) " +
+            "FROM Anuncio a JOIN Imovel i ON a.imovel.id = i.id")
+    List<ImovelAnuncioDTO> findAllImoveisComAnuncios();
+
+//    @Query("SELECT new com.example.hestiaapipostgres.dto.get.ImovelAnuncioDTO(i.id, i.regras, i.descricao, i.quantidadeQuartos, " +
+//            "i.universidadeProxima, i.quantidadeMaximaPessoas, a.nome, a.aluguel, a.dt_inicio) " +
+//            "FROM Anuncio a JOIN Imovel i ON a.imovel_id = i.id WHERE a.anunciante.id = :anuncianteId")
+//    Optional<ImovelAnuncioDTO> findAnuncioImovelByAnuncianteId(@Param("anuncianteId") UUID anuncianteId);
+
+    @Query("SELECT DISTINCT new com.example.hestiaapipostgres.dto.get.ImovelAnuncioDTO(i.id, i.regras, i.descricao, i.quantidadeQuartos, " +
+            "i.universidadeProxima, i.quantidadeMaximaPessoas, a.nome, a.aluguel, a.dt_inicio) " +
+            "FROM Anuncio a JOIN a.imovel i WHERE a.anunciante.id = :anuncianteId")
+    List<ImovelAnuncioDTO> findAnunciosImovelByAnuncianteId(@Param("anuncianteId") UUID anuncianteId);
+
+
+    @Query("SELECT DISTINCT new com.example.hestiaapipostgres.dto.get.ImovelAnuncioDTO(i.id, i.regras, i.descricao, i.quantidadeQuartos, " +
+            "i.universidadeProxima, i.quantidadeMaximaPessoas, a.nome, a.aluguel, a.dt_inicio) " +
+            "FROM Anuncio a JOIN Imovel i ON i.id = a.imovel.id WHERE a.imovel.id = :imovelId")
+    Optional<ImovelAnuncioDTO> findAnuncioByImovelId(@Param("imovelId") UUID imovelId);
+
 
 
     Optional<Anuncio> findAnuncioById(UUID id);
