@@ -34,19 +34,19 @@ public class AnuncioController {
     }
 
     //        =-=--=-==--==-=--=-=-==--==-=-=-=- GET -==--==--===--=-==-=--==-=-=-=-=--==-=--=-=
-    @GetMapping("/property/listAllByAdvertiser/{id}")
-    @Operation(summary = "Listagem de imóveis com informações adicionais pelo ID do anunciante",
-            description = "Retorna uma lista com todos os imóveis com informações adicionais pelo ID do anunciante")
+    @GetMapping("/property/listAllByAdvertiser/{email}")
+    @Operation(summary = "Listagem de imóveis com informações adicionais pelo e-mail do anunciante",
+            description = "Retorna uma lista com todos os imóveis com informações adicionais pelo e-mail do anunciante")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de imóveis com informações adicionais pelo ID do anunciante retornada com sucesso",
+            @ApiResponse(responseCode = "200", description = "Lista de imóveis com informações adicionais pelo e-mail do anunciante retornada com sucesso",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = UniversitarioProfileInfo.class))),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Universitário não encontrado",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class)))
     })
-    public List<ImovelAnuncioDTO> getImoveisAnunciosPorAnuncianteId(@PathVariable("id") UUID anuncianteId){
-        return anuncioService.listAdsPropertiesByAdvertiserId(anuncianteId);
+    public List<ImovelAnuncioDTO> getImoveisAnunciosPorAnuncianteId(@PathVariable("email") String emailAnunciante){
+        return anuncioService.listAdsPropertiesByAdvertiserEmail(emailAnunciante);
     }
 
     @GetMapping("/property/getPropertyById/{id}")
