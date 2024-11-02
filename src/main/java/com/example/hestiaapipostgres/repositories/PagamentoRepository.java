@@ -13,4 +13,5 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, UUID> {
 
     @Override
     Optional<Pagamento> findById(UUID uuid);
+
 }

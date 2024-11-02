@@ -15,11 +15,7 @@ public record RegisterPagamentoDTO(
         @NotNull(message = "O e-mail do usuário assinante não pode ser nulo")
         @NotBlank(message = "O e-mail do usuário assinante não deve estar em branco")
         @JsonProperty("email")
-        String emailUsuarioAssinante,
-        @NotNull(message = "O ID do plano não deve estar nulo")
-        @NotBlank(message = "O ID do plano não deve estar em branco")
-        @JsonProperty("plano_id")
-        UUID planoId
+        String emailUsuarioAssinante
 
 ) {
 
