@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public record ImovelAnuncioDTO(
         @JsonProperty("id")
-        UUID imovelId,
+        UUID anuncioId,
         String regras,
         String descricao,
         @JsonProperty("quantidade_quartos")
