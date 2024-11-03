@@ -26,6 +26,7 @@ public class AnuncianteService {
     public AnuncianteService(AnuncianteRepository anuncianteRepository) {
         this.anuncianteRepository = anuncianteRepository;
     }
+
     public Anunciante listAdvertiserById(UUID id){
         return anuncianteRepository.findAnuncianteById(id).orElseThrow(
                 () -> new EntityNotFoundException("Anunciante não encontrado")
