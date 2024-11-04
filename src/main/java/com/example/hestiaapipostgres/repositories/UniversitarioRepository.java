@@ -1,6 +1,7 @@
 package com.example.hestiaapipostgres.repositories;
 
 import com.example.hestiaapipostgres.models.Universitario;
+import org.postgresql.util.PGobject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -34,5 +35,5 @@ public interface UniversitarioRepository extends JpaRepository<Universitario, UU
     Optional<Universitario> findUniversitarioByDne(String dne);
     Optional<Universitario> findUniversitarioByEmail(String email);
     @Query(value = "SELECT get_user_uuid_by_email(:email)", nativeQuery = true)
-    UUID get_user_uuid_by_email(@Param("email") String email);
+    PGobject get_user_uuid_by_email(@Param("email") String email);
 }

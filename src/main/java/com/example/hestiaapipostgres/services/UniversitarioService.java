@@ -8,11 +8,13 @@ import com.example.hestiaapipostgres.repositories.UniversitarioRepository;
 import jakarta.persistence.EntityExistsException;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.postgresql.util.PGobject;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -54,9 +56,9 @@ public class UniversitarioService {
     }
 
     public UUID get_user_uuid_by_email(String email) {
-        UUID id = universitarioRepository.get_user_uuid_by_email(email);
+        PGobject id = universitarioRepository.get_user_uuid_by_email(email);
         if (id != null) {
-            return id;
+            return UUID.fromString(Objects.requireNonNull(id.getValue()));
         } else {
             throw new EntityNotFoundException("UUID do universitário não encontrado");
         }
