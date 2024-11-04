@@ -56,13 +56,34 @@ public class UniversitarioService {
     }
 
     public UUID get_user_uuid_by_email(String email) {
-        PGobject id = universitarioRepository.get_user_uuid_by_email(email);
-        if (id != null) {
-            return UUID.fromString(Objects.requireNonNull(id.getValue()));
-        } else {
-            throw new EntityNotFoundException("UUID do universitário não encontrado");
+        Object result = universitarioRepository.get_user_uuid_by_email(email);
+        String uuidString = null;
+        if (result instanceof PGobject) {
+            String value = ((PGobject) result).getValue();
+            System.out.println("Valor retornado: " + value); // Log do valor retornado
+
+            // Divide a string usando a vírgula como delimitador
+            String[] parts = value.split(",");
+
+            // Verifica se há pelo menos duas partes e obtém o UUID
+            if (parts.length > 1) {
+                uuidString = parts[1].replace(")", "").strip();
+                System.out.println("UUID: " + uuidString);
+            } else {
+                System.out.println("UUID não encontrado.");
+            }
+
+            // Verifica se o valor é um UUID válido antes de converter
+            if (uuidString != null) {
+                return UUID.fromString(uuidString);
+            } else {
+                throw new IllegalArgumentException("O valor retornado não é um UUID válido: " + value);
+            }
         }
+
+        throw new EntityNotFoundException("UUID do universitário não encontrado ou não é um PGobject");
     }
+
 
     // POST
     public Universitario registerUniversity(RegisterUniversityDTO registerUniversityDTO) {

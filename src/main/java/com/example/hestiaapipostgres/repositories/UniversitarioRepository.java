@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,5 +36,5 @@ public interface UniversitarioRepository extends JpaRepository<Universitario, UU
     Optional<Universitario> findUniversitarioByDne(String dne);
     Optional<Universitario> findUniversitarioByEmail(String email);
     @Query(value = "SELECT get_user_uuid_by_email(:email)", nativeQuery = true)
-    PGobject get_user_uuid_by_email(@Param("email") String email);
+    Object get_user_uuid_by_email(@Param("email") String email);
 }
