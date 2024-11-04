@@ -76,7 +76,10 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, UUID> {
             "FROM Anuncio a JOIN Imovel i ON i.id = a.imovel.id WHERE a.imovel.id = :imovelId")
     Optional<ImovelAnuncioDTO> findAnuncioByImovelId(@Param("imovelId") UUID imovelId);
 
-
+    @Query("SELECT DISTINCT new com.example.hestiaapipostgres.dto.get.ImovelAnuncioDTO(i.id, i.regras, i.descricao, i.quantidadeQuartos, " +
+            "i.universidadeProxima, i.quantidadeMaximaPessoas, a.nome, a.aluguel, a.dt_inicio) " +
+            "FROM Anuncio a JOIN Imovel i ON i.anuncio.id = a.id WHERE a.id = :anuncioId")
+    Optional<ImovelAnuncioDTO> findAnuncioByAnuncioId(@Param("anuncioId") UUID anuncioId);
 
     Optional<Anuncio> findAnuncioById(UUID id);
 

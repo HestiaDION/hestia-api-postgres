@@ -39,6 +39,11 @@ public class AnuncioService {
                 .orElseThrow(() -> new EntityNotFoundException("Este ID de imóvel não existe no banco de dados."));
      }
 
+     public ImovelAnuncioDTO getAdPropertyByAnuncioId(UUID anuncioId){
+        return anuncioRepository.findAnuncioByAnuncioId(anuncioId)
+                .orElseThrow(() -> new EntityNotFoundException("Este ID de anúncio não existe no banco de dados."));
+     }
+
 //    public ImovelAnuncioDTO getAdPropertyByAdvertiser(UUID anuncianteId){
 //        ImovelAnuncioDTO imovelAnuncioDTO = anuncioRepository.findAnuncioImovelByAnuncianteId(anuncianteId).orElseThrow(
 //                () -> new EntityNotFoundException("Moradia por anunciante não encontrado")
