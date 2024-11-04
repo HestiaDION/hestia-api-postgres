@@ -53,6 +53,14 @@ public class UniversitarioService {
         );
     }
 
+    public UUID get_user_uuid_by_email(String email) {
+        UUID id = universitarioRepository.get_user_uuid_by_email(email);
+        if (id != null) {
+            return id;
+        } else {
+            throw new EntityNotFoundException("UUID do universitário não encontrado");
+        }
+    }
 
     // POST
     public Universitario registerUniversity(RegisterUniversityDTO registerUniversityDTO) {
