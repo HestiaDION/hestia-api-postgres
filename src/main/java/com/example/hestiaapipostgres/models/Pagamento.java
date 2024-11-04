@@ -1,5 +1,6 @@
 package com.example.hestiaapipostgres.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -25,6 +26,7 @@ public class Pagamento {
     private String emailUsuarioAssinante;
     @Schema(description = "Representa o ID do plano", example = "123e4567-e89b-12d3-a456-426614174000")
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer"}) // isso aq ignora o proxy do Hibernate usado para Lazy Loading, evitando erro de serialização com Jackson
     @JoinColumn(name = "plano_id")
     private Plano plano;
 
