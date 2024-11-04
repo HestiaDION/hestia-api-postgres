@@ -8,11 +8,13 @@ import com.example.hestiaapipostgres.repositories.UniversitarioRepository;
 import jakarta.persistence.EntityExistsException;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.postgresql.util.PGobject;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -51,6 +53,35 @@ public class UniversitarioService {
         return universitarioRepository.findUniversitarioById(id).orElseThrow(
                 () -> new EntityNotFoundException("Univesitário não encontrado")
         );
+    }
+
+    public UUID get_user_uuid_by_email(String email) {
+        Object result = universitarioRepository.get_user_uuid_by_email(email);
+        String uuidString = null;
+        if (result instanceof PGobject) {
+            String value = ((PGobject) result).getValue();
+            System.out.println("Valor retornado: " + value); // Log do valor retornado
+
+            // Divide a string usando a vírgula como delimitador
+            String[] parts = value.split(",");
+
+            // Verifica se há pelo menos duas partes e obtém o UUID
+            if (parts.length > 1) {
+                uuidString = parts[1].replace(")", "").strip();
+                System.out.println("UUID: " + uuidString);
+            } else {
+                System.out.println("UUID não encontrado.");
+            }
+
+            // Verifica se o valor é um UUID válido antes de converter
+            if (uuidString != null) {
+                return UUID.fromString(uuidString);
+            } else {
+                throw new IllegalArgumentException("O valor retornado não é um UUID válido: " + value);
+            }
+        }
+
+        throw new EntityNotFoundException("UUID do universitário não encontrado ou não é um PGobject");
     }
 
 

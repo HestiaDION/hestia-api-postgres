@@ -83,6 +83,22 @@ public class UniversitarioController {
         return ResponseEntity.ok().body(universitarioProfileInfo);
     }
 
+    @GetMapping("/findId/{email}")
+    @Operation(summary = "Pegar o UUID do universitário de acordo com e-mail",
+            description = "Pegar o UUID do universitário de acordo com e-mail")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "UUID retornado com sucesso",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UniversitarioProfileInfo.class))),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Universitário não encontrado",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class)))
+    })
+    public ResponseEntity<UUID> getUUIDByEmail(@PathVariable String email){
+        UUID uuid = universitarioService.get_user_uuid_by_email(email);
+        return ResponseEntity.ok().body(uuid);
+    }
+
     //                        =-=-=-= POSTS =-=-=-=
 
     @PostMapping("/register")

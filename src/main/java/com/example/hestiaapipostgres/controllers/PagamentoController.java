@@ -1,6 +1,7 @@
 package com.example.hestiaapipostgres.controllers;
 
 
+import com.example.hestiaapipostgres.dto.perfil.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.dto.register.RegisterPagamentoDTO;
 import com.example.hestiaapipostgres.exceptions.CustomErrorResponse;
 import com.example.hestiaapipostgres.models.Pagamento;
@@ -40,6 +41,22 @@ public class PagamentoController {
     public ResponseEntity<Pagamento> registerPagamento(@Valid @RequestBody RegisterPagamentoDTO registerPagamentoDTO){
         Pagamento pagamento = pagamentoService.registerPagamento(registerPagamentoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(pagamento);
+
+    }
+
+    @GetMapping("findByUserEmail/{email}")
+    @Operation(summary = "Get de imóvel com informações adicionais por seu ID",
+            description = "Retorna um imóvel com informações adicionais com base em seu ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Imóvel retornado com sucesso",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UniversitarioProfileInfo.class))),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Imóvel não encontrado",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class)))
+    })
+    public ResponseEntity<Pagamento> findPaymentByUserEmail(@PathVariable String email){
+        return ResponseEntity.ok().body(pagamentoService.getPagamentoByUserEmail(email));
 
     }
 
