@@ -50,8 +50,8 @@ public class AnuncioController {
     }
 
     @GetMapping("/property/getPropertyById/{id}")
-    @Operation(summary = "Get de imóvel com informações adicionais por seu ID",
-            description = "Retorna um imóvel com informações adicionais com base em seu ID")
+    @Operation(summary = "Get de imóvel com informações adicionais pelo ID do imóvel",
+            description = "Retorna um imóvel com informações adicionais com base no ID do imóvel")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Imóvel retornado com sucesso",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = UniversitarioProfileInfo.class))),
@@ -62,6 +62,21 @@ public class AnuncioController {
     })
     public ResponseEntity<ImovelAnuncioDTO> getPropertyById(@PathVariable() UUID id){
         return ResponseEntity.ok().body(anuncioService.getAdPropertyByImovelId(id));
+    }
+
+    @GetMapping("/property/getPropertyByAdId/{id}")
+    @Operation(summary = "Get de imóvel com informações adicionais pelo ID do anúncio",
+            description = "Retorna um imóvel com informações adicionais com base no ID do anúncio")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Imóvel retornado com sucesso",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UniversitarioProfileInfo.class))),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Imóvel não encontrado",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class)))
+    })
+    public ResponseEntity<ImovelAnuncioDTO> getPropertyByAdId(@PathVariable() UUID id){
+        return ResponseEntity.ok().body(anuncioService.getAdPropertyByAnuncioId(id));
     }
 
     @GetMapping("/property/listAll")
