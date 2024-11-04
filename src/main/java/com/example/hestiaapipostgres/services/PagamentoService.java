@@ -41,8 +41,8 @@ public class PagamentoService {
             Plano plano = planoOptional.get();
 
             Pagamento pagamento = new Pagamento(
-                    pagamentoDTO.emailUsuarioAssinante(),
                     pagamentoDTO.nomeUsuarioAssinante(),
+                    pagamentoDTO.emailUsuarioAssinante(),
                     plano
             );
 
@@ -50,6 +50,11 @@ public class PagamentoService {
         } else {
             throw new IllegalArgumentException("Plano não encontrado para o e-mail: " + pagamentoDTO.emailUsuarioAssinante());
         }
+    }
+
+    public Pagamento getPagamentoByUserEmail(String userEmail){
+        return pagamentoRepository.findByEmailUsuarioAssinante(userEmail)
+                .orElseThrow(() -> new EntityNotFoundException("Este e-mail não existe na tabela de pagamento do plano."));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.hestiaapipostgres.controllers;
 
 
+import com.example.hestiaapipostgres.dto.perfil.UniversitarioProfileInfo;
 import com.example.hestiaapipostgres.dto.register.RegisterPagamentoDTO;
 import com.example.hestiaapipostgres.exceptions.CustomErrorResponse;
 import com.example.hestiaapipostgres.models.Pagamento;
@@ -13,10 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/payment")
@@ -43,6 +41,22 @@ public class PagamentoController {
     public ResponseEntity<Pagamento> registerPagamento(@Valid @RequestBody RegisterPagamentoDTO registerPagamentoDTO){
         Pagamento pagamento = pagamentoService.registerPagamento(registerPagamentoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(pagamento);
+
+    }
+
+    @GetMapping("findByUserEmail/{email}")
+    @Operation(summary = "Get de imóvel com informações adicionais por seu ID",
+            description = "Retorna um imóvel com informações adicionais com base em seu ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Imóvel retornado com sucesso",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UniversitarioProfileInfo.class))),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Imóvel não encontrado",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomErrorResponse.class)))
+    })
+    public ResponseEntity<Pagamento> findPaymentByUserEmail(@PathVariable String email){
+        return ResponseEntity.ok().body(pagamentoService.getPagamentoByUserEmail(email));
 
     }
 
