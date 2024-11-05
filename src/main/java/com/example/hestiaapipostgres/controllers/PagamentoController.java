@@ -27,7 +27,7 @@ public class PagamentoController {
      }
 
 //                  =-=-==-=--=-= POST ---==-=--=
-    @PostMapping("registerPayment")
+    @PostMapping("/registerPayment")
     @Operation(summary = "Registro de um pagamento",
             description = "Registra um pagamento no banco de dados")
     @ApiResponses(value = {
