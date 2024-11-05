@@ -21,12 +21,14 @@ public class JwtTokenService {
     private final JwtEncoder jwtEncoder;
     private final UsuarioRepository usuarioRepository;
 
+    private final String ADMIN_PERMISSION = "ADMIN";
+
     public JwtTokenService(JwtEncoder jwtEncoder, UsuarioRepository usuarioRepository) {
         this.jwtEncoder = jwtEncoder;
         this.usuarioRepository = usuarioRepository;
     }
 
-    public TokenAccess generateToken(String email) {
+    public TokenAccess generateToken(String email) throws AccessDeniedException {
         Instant now = Instant.now();
         Optional<InfoUserDTO> infoUserDTO = usuarioRepository.findUserOriginByEmail(email);
 
@@ -35,20 +37,24 @@ public class JwtTokenService {
         }
 
         String tipoUsuario = infoUserDTO.get().tipoConta();
+        System.out.println(tipoUsuario);
+        if (!tipoUsuario.equals("ADMIN")){
+            throw new AccessDeniedException("Você não possui permissão para acessar este recurso");
+        }
+
 
         JwtClaimsSet claimsSet = JwtClaimsSet.builder()
                 .issuer("self")
                 .issuedAt(now)
-                .expiresAt(now.plus(365, ChronoUnit.DAYS))
+                .expiresAt(now.plus(1, ChronoUnit.HOURS))
                 .subject(email)
-                .claim("scope", tipoUsuario.toUpperCase())
+                .claim("scope", ADMIN_PERMISSION)
                 .build();
 
         JwsHeader jwsHeader = JwsHeader.with(() -> "RS256").build();
 
         String token = this.jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claimsSet)).getTokenValue();
-        TokenAccess tokenAccess = TokenAccess.fromToken(token);
-        return tokenAccess;
+        return new TokenAccess(token);
 
     }
 }
