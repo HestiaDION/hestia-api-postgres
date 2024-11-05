@@ -1,7 +1,6 @@
 package com.example.hestiaapipostgres.dto.get;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.nimbusds.jose.shaded.gson.annotations.SerializedName;
 
 import java.time.LocalDate;
 import java.util.UUID;

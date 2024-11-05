@@ -20,7 +20,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +39,6 @@ public class UniversitarioController {
     //                        ==--=--= GETS -==-=-=-=-
 
     @GetMapping("/listAll")
-    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     @Operation(summary = "Listagem de todos os universitários",
             description = "Listagem completa de todos os universitários registrados na base, com todas as suas informações.")
     @ApiResponses(value = {
