@@ -52,6 +52,7 @@ public class SecurityConfig {
         return keyPairGenerator.generateKeyPair();
     }
 
+
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
