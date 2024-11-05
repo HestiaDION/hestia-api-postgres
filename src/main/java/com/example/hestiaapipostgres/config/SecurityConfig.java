@@ -59,6 +59,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/token/**").permitAll()
                         .requestMatchers("/status/**").permitAll()
+                        .requestMatchers("/status/**").permitAll()
                         .requestMatchers(
                                 "/docs/**",
                                 "/v3/api-docs/**",
