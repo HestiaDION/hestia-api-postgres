@@ -64,6 +64,7 @@ public class AnuncioController {
         return ResponseEntity.ok().body(anuncioService.getAdPropertyByImovelId(id));
     }
 
+
     @GetMapping("/property/getPropertyByAdId/{id}")
     @Operation(summary = "Get de imóvel com informações adicionais pelo ID do anúncio",
             description = "Retorna um imóvel com informações adicionais com base no ID do anúncio")
