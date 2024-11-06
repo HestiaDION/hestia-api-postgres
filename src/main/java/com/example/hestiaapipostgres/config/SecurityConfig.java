@@ -60,6 +60,8 @@ public class SecurityConfig {
                         .requestMatchers("/token/**").permitAll()
                         .requestMatchers("/status/**").permitAll()
                         .requestMatchers("/status/**").permitAll()
+                        .requestMatchers("/university/register/**").permitAll()
+                        .requestMatchers("/advertiser/register/**").permitAll()
                         .requestMatchers(
                                 "/docs/**",
                                 "/v3/api-docs/**",
