@@ -3,7 +3,8 @@ package com.example.hestiaapipostgres.services;
 import com.example.hestiaapipostgres.dto.get.ImovelAnuncioDTO;
 import com.example.hestiaapipostgres.dto.register.RegisterAnuncioDTO;
 import com.example.hestiaapipostgres.models.Anuncio;
-import com.example.hestiaapipostgres.models.Imovel;
+import com.example.hestiaapipostgres.models.Universitario;
+
 import com.example.hestiaapipostgres.repositories.AnuncianteRepository;
 import com.example.hestiaapipostgres.repositories.AnuncioRepository;
 import jakarta.persistence.EntityExistsException;
@@ -43,12 +44,6 @@ public class AnuncioService {
         return anuncioRepository.findAnuncioByAnuncioId(anuncioId)
                 .orElseThrow(() -> new EntityNotFoundException("Este ID de anúncio não existe no banco de dados."));
      }
-
-//    public ImovelAnuncioDTO getAdPropertyByAdvertiser(UUID anuncianteId){
-//        ImovelAnuncioDTO imovelAnuncioDTO = anuncioRepository.findAnuncioImovelByAnuncianteId(anuncianteId).orElseThrow(
-//                () -> new EntityNotFoundException("Moradia por anunciante não encontrado")
-//        )
-//    }
 
     public List<ImovelAnuncioDTO>  listAdsPropertiesByAdvertiserEmail(String emailAnuciante){
         return anuncioRepository.findAnunciosImovelByAnuncianteEmail(emailAnuciante);

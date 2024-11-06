@@ -1,6 +1,7 @@
 package com.example.hestiaapipostgres.repositories;
 
 import com.example.hestiaapipostgres.models.Anuncio;
+import com.example.hestiaapipostgres.models.Universitario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -82,6 +83,9 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, UUID> {
     Optional<ImovelAnuncioDTO> findAnuncioByAnuncioId(@Param("anuncioId") UUID anuncioId);
 
     Optional<Anuncio> findAnuncioById(UUID id);
+
+
+
 
 
 }

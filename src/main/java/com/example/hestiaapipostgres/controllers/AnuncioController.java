@@ -107,6 +107,7 @@ public class AnuncioController {
     }
 
 
+
     //        =-=--=-==--==-=--=-=-==--==-=-=-=- POST -==--==--===--=-==-=--==-=-=-=-=--==-=--=-=
 
     @PostMapping("/register")
