@@ -6,16 +6,20 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@ControllerAdvice
 @RestController
 public class StatusController {
 
@@ -37,3 +41,4 @@ public class StatusController {
         return new ResponseEntity<>(status, HttpStatus.OK);
     }
 }
+

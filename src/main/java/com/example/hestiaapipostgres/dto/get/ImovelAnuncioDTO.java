@@ -20,7 +20,11 @@ public record ImovelAnuncioDTO(
         String nomeAnuncio,
         double aluguel,
         @JsonProperty("dt_inicio")
-        LocalDate dtInicio
+        LocalDate dtInicio,
+        @JsonProperty("email_anunciante")
+        String emailAnunciante,
+        @JsonProperty("anunciante_id")
+        UUID anuncianteId
 
 ) {
 }
