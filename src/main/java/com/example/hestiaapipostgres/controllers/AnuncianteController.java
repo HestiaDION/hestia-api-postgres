@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,7 +53,7 @@ public class AnuncianteController {
     }
 
     @GetMapping("listAll")
-    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+
     @Operation(summary = "Listagem de todos os anunciantes",
             description = "Listagem completa de todos os anunciantes registrados na base, com todas as suas informações.")
     @ApiResponses(value = {

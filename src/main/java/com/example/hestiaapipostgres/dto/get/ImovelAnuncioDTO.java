@@ -1,7 +1,6 @@
 package com.example.hestiaapipostgres.dto.get;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.nimbusds.jose.shaded.gson.annotations.SerializedName;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -22,10 +21,8 @@ public record ImovelAnuncioDTO(
         double aluguel,
         @JsonProperty("dt_inicio")
         LocalDate dtInicio,
-
         @JsonProperty("email_anunciante")
         String emailAnunciante,
-
         @JsonProperty("anunciante_id")
         UUID anuncianteId
 
