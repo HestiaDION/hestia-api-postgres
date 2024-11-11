@@ -9,6 +9,7 @@ import com.example.hestiaapipostgres.repositories.AnuncianteRepository;
 import com.example.hestiaapipostgres.repositories.AnuncioRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -35,16 +36,22 @@ public class AnuncioService {
         return anuncioRepository.findAllImoveisComAnuncios();
     }
 
+
+    @Cacheable(value = "cachePropertyByImovelId", key="#id")
     public ImovelAnuncioDTO getAdPropertyByImovelId(UUID imovelId){
         return anuncioRepository.findAnuncioByImovelId(imovelId)
                 .orElseThrow(() -> new EntityNotFoundException("Este ID de imóvel não existe no banco de dados."));
      }
 
+
+    @Cacheable(value = "cachePropertyByAdId", key="#id")
      public ImovelAnuncioDTO getAdPropertyByAnuncioId(UUID anuncioId){
         return anuncioRepository.findAnuncioByAnuncioId(anuncioId)
                 .orElseThrow(() -> new EntityNotFoundException("Este ID de anúncio não existe no banco de dados."));
      }
 
+
+    @Cacheable(value = "cachePropertiesListByAdvertiserEmail", key="#email")
     public List<ImovelAnuncioDTO>  listAdsPropertiesByAdvertiserEmail(String emailAnuciante){
         return anuncioRepository.findAnunciosImovelByAnuncianteEmail(emailAnuciante);
     }

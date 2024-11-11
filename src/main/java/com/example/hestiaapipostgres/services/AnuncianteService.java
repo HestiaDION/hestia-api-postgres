@@ -41,6 +41,7 @@ public class AnuncianteService {
 
     // Implementação para redis
     @Cacheable(value = "cacheAdvertiserProfile", key = "#email")
+    @CacheEvict(value = "cacheAdvertiserProfile", key= "#email")
     public AnuncianteProfileInfo getInfoProfileByAdvertiser(String email){
         Anunciante anuncianteProfileInfo = anuncianteRepository.findAnuncianteByEmail(email).orElseThrow(
                 () -> new EntityNotFoundException("Anunciante não encontrado")
@@ -85,8 +86,7 @@ public class AnuncianteService {
     }
 
     // PATCH
-    @CacheEvict(value = "cacheUniversityProfile", key= "#email")
-
+    @CacheEvict(value = "cacheAdvertiserProfile", key= "#email")
     public Anunciante updateAdvertiser(String email, UpdateAdvertiserDTO updateAdvertiserDTO){
 
         Optional<Anunciante> anuncianteExistente = anuncianteRepository.findAnuncianteByEmail(email);

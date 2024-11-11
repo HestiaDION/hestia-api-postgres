@@ -34,6 +34,7 @@ public class UniversitarioService {
     }
 
     @Cacheable(value = "cacheUniversityProfile", key="#email")
+    @CacheEvict(value = "cacheUniversityProfile", key= "#email")
     public UniversitarioProfileInfo getInfoProfileByUniversity(String email){
         Universitario universitarioProfileInfo = universitarioRepository.findUniversitarioByEmail(email).orElseThrow(
                 () -> new EntityNotFoundException("Univesitário não encontrado")
@@ -87,8 +88,6 @@ public class UniversitarioService {
 
     // POST
     public Universitario registerUniversity(RegisterUniversityDTO registerUniversityDTO) {
-
-
         if (universitarioRepository.findUniversitarioByDne(registerUniversityDTO.dne()).isPresent()) {
             throw new EntityExistsException("Este registro já existe no banco!");
         }

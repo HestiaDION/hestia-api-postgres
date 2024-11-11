@@ -9,6 +9,7 @@ import com.example.hestiaapipostgres.repositories.PlanoRepository;
 
 import com.example.hestiaapipostgres.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 
@@ -52,6 +53,7 @@ public class PagamentoService {
         }
     }
 
+    @Cacheable(value = "cachePaymentByUserEmail", key="#email")
     public Pagamento getPagamentoByUserEmail(String userEmail){
         return pagamentoRepository.findByEmailUsuarioAssinante(userEmail)
                 .orElseThrow(() -> new EntityNotFoundException("Este e-mail não existe na tabela de pagamento do plano."));
