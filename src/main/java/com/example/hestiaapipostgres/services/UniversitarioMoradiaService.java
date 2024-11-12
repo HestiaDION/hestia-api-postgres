@@ -29,7 +29,6 @@ public class UniversitarioMoradiaService {
     }
 
     // GET
-    @Cacheable(value = "cacheUniversitiesListByImovelId", key="#imovelId")
     public List<Universitario> listUniversitariosByImovelId(UUID imovelId) {
         return universitarioMoradiaRepository.findUniversitariosByImovelId(imovelId);
     }
