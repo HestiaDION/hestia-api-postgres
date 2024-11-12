@@ -37,14 +37,14 @@ public class AnuncioService {
     }
 
 
-    @Cacheable(value = "cachePropertyByImovelId", key="#id")
+    @Cacheable(value = "cachePropertyByImovelId", key="#imovelId")
     public ImovelAnuncioDTO getAdPropertyByImovelId(UUID imovelId){
         return anuncioRepository.findAnuncioByImovelId(imovelId)
                 .orElseThrow(() -> new EntityNotFoundException("Este ID de imóvel não existe no banco de dados."));
      }
 
 
-    @Cacheable(value = "cachePropertyByAdId", key="#id")
+    @Cacheable(value = "cachePropertyByAdId", key="#anuncioId")
      public ImovelAnuncioDTO getAdPropertyByAnuncioId(UUID anuncioId){
         return anuncioRepository.findAnuncioByAnuncioId(anuncioId)
                 .orElseThrow(() -> new EntityNotFoundException("Este ID de anúncio não existe no banco de dados."));

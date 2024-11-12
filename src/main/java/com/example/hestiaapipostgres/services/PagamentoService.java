@@ -53,7 +53,7 @@ public class PagamentoService {
         }
     }
 
-    @Cacheable(value = "cachePaymentByUserEmail", key="#email")
+    @Cacheable(value = "cachePaymentByUserEmail", key="#userEmail")
     public Pagamento getPagamentoByUserEmail(String userEmail){
         return pagamentoRepository.findByEmailUsuarioAssinante(userEmail)
                 .orElseThrow(() -> new EntityNotFoundException("Este e-mail não existe na tabela de pagamento do plano."));
