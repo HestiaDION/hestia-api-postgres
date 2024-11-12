@@ -51,7 +51,7 @@ public class AnuncioService {
      }
 
 
-    @Cacheable(value = "cachePropertiesListByAdvertiserEmail", key="#email")
+    @Cacheable(value = "cachePropertiesListByAdvertiserEmail", key="#emailAnunciante")
     public List<ImovelAnuncioDTO>  listAdsPropertiesByAdvertiserEmail(String emailAnuciante){
         return anuncioRepository.findAnunciosImovelByAnuncianteEmail(emailAnuciante);
     }
