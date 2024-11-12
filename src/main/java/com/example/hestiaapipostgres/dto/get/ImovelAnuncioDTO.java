@@ -1,11 +1,13 @@
 package com.example.hestiaapipostgres.dto.get;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.nimbusds.jose.shaded.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public record ImovelAnuncioDTO(
+public record ImovelAnuncioDTO (
         @JsonProperty("id")
         UUID anuncioId,
         String regras,
@@ -26,5 +28,6 @@ public record ImovelAnuncioDTO(
         @JsonProperty("anunciante_id")
         UUID anuncianteId
 
-) {
+) implements Serializable {
+        private static final long serialVersionUID = 1L;
 }
