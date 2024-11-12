@@ -9,6 +9,7 @@ import com.example.hestiaapipostgres.repositories.UniversitarioMoradiaRepository
 import com.example.hestiaapipostgres.repositories.UniversitarioRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class UniversitarioMoradiaService {
     }
 
     // GET
+    @Cacheable(value = "cacheUniversitiesListByImovelId", key="#id")
     public List<Universitario> listUniversitariosByImovelId(UUID imovelId) {
         return universitarioMoradiaRepository.findUniversitariosByImovelId(imovelId);
     }

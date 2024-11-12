@@ -15,6 +15,6 @@ public interface PlanoRepository extends JpaRepository<Plano, UUID> {
 
 //    Optional<Plano> findPlanoById(UUID id);
 
-    @Query(value = "SELECT * FROM get_planos_by_user_email(:email)", nativeQuery = true)
+    @Query(value = "SELECT * FROM get_plano_by_user_email(:email)", nativeQuery = true)
     Optional<Plano> findPlanoByUserEmail(@Param("email") String email);
 }
